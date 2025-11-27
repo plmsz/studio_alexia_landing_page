@@ -5,6 +5,8 @@ export interface Service {
   image: string;
   imageAlt: string;
   featured: boolean;
+  price?: number;
+  duration?: string;
 }
 
 export interface ScheduleDay {

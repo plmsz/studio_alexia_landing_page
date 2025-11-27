@@ -9,6 +9,29 @@
   --text-soft: #dcd3ce;
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Poppins', sans-serif;
+  
+  /* Admin colors */
+  --card-bg: #2c2a2a;
+  --error-color: #e57373;
+  
+  /* Transparent variations */
+  --gold-10: rgba(194, 167, 115, 0.1);
+  --gold-20: rgba(194, 167, 115, 0.2);
+  --gold-30: rgba(194, 167, 115, 0.3);
+  
+  --secondary-10: rgba(139, 94, 60, 0.1);
+  --secondary-20: rgba(139, 94, 60, 0.2);
+  
+  --primary-30: rgba(94, 42, 42, 0.3);
+  
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-15: rgba(255, 255, 255, 0.15);
+  --white-20: rgba(255, 255, 255, 0.2);
+  
+  --black-20: rgba(0, 0, 0, 0.2);
+  --black-30: rgba(0, 0, 0, 0.3);
+  --black-50: rgba(0, 0, 0, 0.5);
+  --black-80: rgba(0, 0, 0, 0.8);
 }
 
 * {

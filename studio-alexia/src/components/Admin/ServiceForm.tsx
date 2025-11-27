@@ -15,7 +15,9 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
     description: '',
     image: '',
     imageAlt: '',
-    featured: false
+    featured: false,
+    price: undefined as number | undefined,
+    duration: ''
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -30,7 +32,9 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
         description: service.description,
         image: service.image,
         imageAlt: service.imageAlt,
-        featured: service.featured
+        featured: service.featured,
+        price: service.price,
+        duration: service.duration || ''
       });
     }
   }, [service]);
@@ -78,9 +82,17 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
+    let processedValue: string | boolean | number | undefined = value;
+
+    if (type === 'checkbox') {
+      processedValue = checked;
+    } else if (name === 'price') {
+      processedValue = value ? parseFloat(value) : undefined;
+    }
+
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: processedValue
     }));
 
     if (errors[name]) {
@@ -178,6 +190,7 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
               value={formData.description}
               onChange={handleChange}
               rows={4}
+              maxLength={500}
               className={errors.description ? styles.inputError : ''}
             />
             {errors.description && <span className={styles.error}>{errors.description}</span>}
@@ -237,8 +250,35 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
               value={formData.imageAlt}
               onChange={handleChange}
               className={errors.imageAlt ? styles.inputError : ''}
+              maxLength={50}
             />
             {errors.imageAlt && <span className={styles.error}>{errors.imageAlt}</span>}
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="price">Preço (R$)</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={formData.price || ''}
+              onChange={handleChange}
+              placeholder="Ex: 120.00"
+              step="0.01"
+              min="0"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="duration">Duração</label>
+            <input
+              type="text"
+              id="duration"
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              placeholder="Ex: 1h 30min"
+            />
           </div>
 
           <div className={styles.formGroup}>

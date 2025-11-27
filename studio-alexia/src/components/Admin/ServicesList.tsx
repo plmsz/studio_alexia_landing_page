@@ -1,4 +1,5 @@
 import type { Service } from '../../types/service';
+import { formatPrice, formatDuration } from '../../utils/formatUtils';
 import styles from './Admin.module.css';
 
 interface ServicesListProps {
@@ -22,6 +23,8 @@ const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
             <th>ID</th>
             <th>Título</th>
             <th>Descrição</th>
+            <th>Preço</th>
+            <th>Duração</th>
             <th>Destacado</th>
             <th>Ações</th>
           </tr>
@@ -32,6 +35,8 @@ const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
               <td>{service.id}</td>
               <td>{service.title}</td>
               <td className={styles.description}>{service.description}</td>
+              <td>{formatPrice(service.price)}</td>
+              <td>{formatDuration(service.duration)}</td>
               <td>
                 {service.featured ? (
                   <span className={styles.badge}>Sim</span>

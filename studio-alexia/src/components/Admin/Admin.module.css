@@ -11,10 +11,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
-  background: #2c2a2a;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px var(--black-30);
 }
 
 .header h1 {
@@ -33,7 +33,7 @@
 }
 
 .error {
-  color: #e57373;
+  color: var(--error-color);
 }
 
 .message {
@@ -44,14 +44,14 @@
 }
 
 .message.success {
-  background-color: rgba(139, 94, 60, 0.2);
+  background-color: var(--secondary-20);
   color: var(--gold);
   border: 1px solid var(--secondary);
 }
 
 .message.error {
-  background-color: rgba(94, 42, 42, 0.3);
-  color: #e57373;
+  background-color: var(--primary-30);
+  color: var(--error-color);
   border: 1px solid var(--primary);
 }
 
@@ -73,9 +73,9 @@
 
 /* Services List */
 .servicesList {
-  background: #2c2a2a;
+  background: var(--card-bg);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px var(--black-30);
   overflow: hidden;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .table thead {
-  background-color: rgba(94, 42, 42, 0.3);
+  background-color: var(--primary-30);
 }
 
 .table th {
@@ -93,17 +93,17 @@
   text-align: left;
   font-weight: 600;
   color: var(--gold);
-  border-bottom: 2px solid rgba(194, 167, 115, 0.2);
+  border-bottom: 2px solid var(--gold-20);
 }
 
 .table td {
   padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--white-10);
   color: var(--text-soft);
 }
 
 .table tbody tr:hover {
-  background-color: rgba(139, 94, 60, 0.1);
+  background-color: var(--secondary-10);
 }
 
 .description {
@@ -126,7 +126,7 @@
 .badgeNo {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--white-20);
   color: var(--text-soft);
   border-radius: 12px;
   font-size: 0.875rem;
@@ -177,7 +177,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: var(--black-80);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -186,15 +186,15 @@
 }
 
 .formContainer {
-  background: #2c2a2a;
+  background: var(--card-bg);
   border-radius: 8px;
   padding: 2rem;
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(194, 167, 115, 0.2);
+  box-shadow: 0 8px 16px var(--black-50);
+  border: 1px solid var(--gold-20);
 }
 
 .formContainer h2 {
@@ -225,11 +225,11 @@
 .formGroup textarea,
 .formGroup select {
   padding: 0.75rem;
-  border: 1px solid rgba(194, 167, 115, 0.3);
+  border: 1px solid var(--gold-30);
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--black-30);
   color: var(--text-light);
 }
 
@@ -238,7 +238,7 @@
 .formGroup select:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 2px rgba(194, 167, 115, 0.2);
+  box-shadow: 0 0 0 2px var(--gold-20);
 }
 
 .inputError {
@@ -246,7 +246,7 @@
 }
 
 .error {
-  color: #e57373;
+  color: var(--error-color);
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
@@ -265,23 +265,23 @@
 }
 
 .uploadArea {
-  border: 2px dashed rgba(194, 167, 115, 0.3);
+  border: 2px dashed var(--gold-30);
   border-radius: 8px;
   padding: 2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--black-20);
 }
 
 .uploadArea:hover {
   border-color: var(--gold);
-  background-color: rgba(139, 94, 60, 0.1);
+  background-color: var(--secondary-10);
 }
 
 .uploadArea.dragging {
   border-color: var(--gold);
-  background-color: rgba(139, 94, 60, 0.2);
+  background-color: var(--secondary-20);
 }
 
 .uploadText {
@@ -306,7 +306,7 @@
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(194, 167, 115, 0.2);
+  border: 1px solid var(--gold-20);
 }
 
 .imagePreview img {
@@ -344,10 +344,10 @@
 }
 
 .btnCancel {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--white-15);
   color: var(--text-soft);
   padding: 0.75rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--white-20);
   border-radius: 6px;
   cursor: pointer;
   font-size: 1rem;

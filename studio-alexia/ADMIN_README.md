@@ -60,18 +60,7 @@ O sistema permite upload real de imagens com as seguintes características:
 3. Visualize o preview da imagem
 4. Preencha os demais campos e salve
 
-### Imagens Existentes
-As 11 imagens originais já foram convertidas para base64 e estão no db.json
-
 ## Banco de Dados
 
 O banco de dados é o arquivo `db.json` na raiz do projeto. As alterações são salvas automaticamente neste arquivo pelo json-server.
 
-## Tecnologias Utilizadas
-
-- **React 19** + **TypeScript**
-- **Vite** (Build tool)
-- **React Router** (Navegação)
-- **Axios** (HTTP Client)
-- **JSON Server** (Mock API)
-- **CSS Modules** (Estilização)

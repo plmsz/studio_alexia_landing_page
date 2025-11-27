@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  background-color: var(--primary);
+  padding: 1rem;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+.header a {
+  color: var(--gold);
+  font-size: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.header a:hover {
+  opacity: 0.8;
+}

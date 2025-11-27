@@ -3,6 +3,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicos" element={<ServicesPage />} />
+        <Route path="/admin" element={<Dashboard />} />
       </Routes>
       <Footer />
     </Router>

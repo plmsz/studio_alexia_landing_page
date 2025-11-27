@@ -72,3 +72,11 @@ Acesse a versão online em: [Studio Alexia Menezes - Landing Page](https://plmsz
 [![Twitter Badge](https://img.shields.io/static/v1?label=&message=Twitter&color=1ca0f1&style=flat-square&logo=Twitter&logoColor=white)](https://twitter.com/plmszdev)
 
 </div>
+
+#TODO 
+- [] verificar maxleng de descrição e legenda da foto
+- [ ] Backend json - hospedar
+- [ ] SEO
+- [ ] Responsividade
+- [ ] Autenticação 
+- [ ] Hospedar no Netlify

@@ -4,6 +4,7 @@ export interface Service {
   description: string;
   image: string;
   imageAlt: string;
+  featured: boolean;
 }
 
 export interface ScheduleDay {

@@ -1,0 +1,413 @@
+.container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  background: #2c2a2a;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--gold);
+  font-size: 1.8rem;
+  font-family: var(--font-heading);
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.error {
+  color: #e57373;
+}
+
+.message {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.message.success {
+  background-color: rgba(139, 94, 60, 0.2);
+  color: var(--gold);
+  border: 1px solid var(--secondary);
+}
+
+.message.error {
+  background-color: rgba(94, 42, 42, 0.3);
+  color: #e57373;
+  border: 1px solid var(--primary);
+}
+
+.btnAdd {
+  background-color: var(--secondary);
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btnAdd:hover {
+  opacity: 0.85;
+}
+
+/* Services List */
+.servicesList {
+  background: #2c2a2a;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  background-color: rgba(94, 42, 42, 0.3);
+}
+
+.table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gold);
+  border-bottom: 2px solid rgba(194, 167, 115, 0.2);
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-soft);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(139, 94, 60, 0.1);
+}
+
+.description {
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--secondary);
+  color: var(--text-light);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badgeNo {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-soft);
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnEdit {
+  background-color: var(--gold);
+  color: var(--bg-main);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btnEdit:hover {
+  opacity: 0.85;
+}
+
+.btnDelete {
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btnDelete:hover {
+  opacity: 0.85;
+}
+
+/* Form Overlay */
+.formOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.formContainer {
+  background: #2c2a2a;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(194, 167, 115, 0.2);
+}
+
+.formContainer h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+  font-family: var(--font-heading);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroup label {
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+  padding: 0.75rem;
+  border: 1px solid rgba(194, 167, 115, 0.3);
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--text-light);
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(194, 167, 115, 0.2);
+}
+
+.inputError {
+  border-color: var(--primary) !important;
+}
+
+.error {
+  color: #e57373;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: normal !important;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: auto;
+  cursor: pointer;
+}
+
+.uploadArea {
+  border: 2px dashed rgba(194, 167, 115, 0.3);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.uploadArea:hover {
+  border-color: var(--gold);
+  background-color: rgba(139, 94, 60, 0.1);
+}
+
+.uploadArea.dragging {
+  border-color: var(--gold);
+  background-color: rgba(139, 94, 60, 0.2);
+}
+
+.uploadText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-soft);
+}
+
+.uploadText span:first-child {
+  font-size: 1.1rem;
+  color: var(--gold);
+}
+
+.uploadHint {
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  opacity: 0.7;
+}
+
+.imagePreview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(194, 167, 115, 0.2);
+}
+
+.imagePreview img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.btnRemoveImage {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btnRemoveImage:hover {
+  opacity: 0.85;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.btnCancel {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-soft);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: opacity 0.3s;
+}
+
+.btnCancel:hover {
+  opacity: 0.8;
+}
+
+.btnSubmit {
+  background-color: var(--secondary);
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.btnSubmit:hover {
+  opacity: 0.85;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .description {
+    max-width: 200px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .formContainer {
+    padding: 1.5rem;
+  }
+}

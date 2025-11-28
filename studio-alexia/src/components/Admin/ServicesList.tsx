@@ -28,9 +28,8 @@ const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
           </tr>
         </thead>
         <tbody>
-          {services.map(service => (
+          {services.map((service) => (
             <tr key={service.id}>
-              <td>{service.id}</td>
               <td>{service.title}</td>
               <td className={styles.description}>{service.description}</td>
               <td>{formatPrice(service.price)}</td>

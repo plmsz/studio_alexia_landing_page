@@ -10,20 +10,19 @@ dayjs.locale('pt-br');
  * @param price - Preço em número
  * @returns String formatada como R$ XX,XX
  */
-export const formatPrice = (price: number): string => {
-  if(isNaN(price)) return '-';
+export function formatPrice(price: number): string {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL'
+    currency: 'BRL',
   }).format(price);
-};
+}
 
 /**
  * Formata a duração em minutos para formato legível
  * @param minutes - Duração em minutos
  * @returns String formatada como "Xh Ymin" ou "Xmin"
  */
-export const formatDuration = (minutes: number): string => {
+export function formatDuration(minutes: number): string {
   const dur = dayjs.duration(minutes, 'minutes');
   const hours = Math.floor(dur.asHours());
   const mins = dur.minutes();
@@ -35,4 +34,4 @@ export const formatDuration = (minutes: number): string => {
   } else {
     return `${mins}min`;
   }
-};
+}

@@ -16,8 +16,8 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
     image: '',
     imageAlt: '',
     featured: false,
-    price: undefined as number | undefined,
-    duration: ''
+    price: 0,
+    duration: 0
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -33,8 +33,8 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
         image: service.image,
         imageAlt: service.imageAlt,
         featured: service.featured,
-        price: service.price,
-        duration: service.duration || ''
+        price: service.price || 0,
+        duration: service.duration || 0
       });
     }
   }, [service]);
@@ -56,6 +56,14 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
 
     if (!formData.imageAlt.trim()) {
       newErrors.imageAlt = 'Texto alternativo é obrigatório';
+    }
+
+    if (!formData.price || formData.price <= 0) {
+      newErrors.price = 'Preço é obrigatório e deve ser maior que zero';
+    }
+
+    if (!formData.duration || formData.duration <= 0) {
+      newErrors.duration = 'Duração é obrigatória e deve ser maior que zero';
     }
 
     setErrors(newErrors);
@@ -82,12 +90,14 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
 
-    let processedValue: string | boolean | number | undefined = value;
+    let processedValue: string | boolean | number = value;
 
     if (type === 'checkbox') {
       processedValue = checked;
     } else if (name === 'price') {
-      processedValue = value ? parseFloat(value) : undefined;
+      processedValue = value ? parseFloat(value) : 0;
+    } else if (name === 'duration') {
+      processedValue = value ? parseInt(value, 10) : 0;
     }
 
     setFormData(prev => ({
@@ -256,7 +266,7 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="price">Preço (R$)</label>
+            <label htmlFor="price">Preço (R$) *</label>
             <input
               type="number"
               id="price"
@@ -266,19 +276,27 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
               placeholder="Ex: 120.00"
               step="0.01"
               min="0"
+              className={errors.price ? styles.inputError : ''}
             />
+            {errors.price && <span className={styles.error}>{errors.price}</span>}
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="duration">Duração</label>
+            <label htmlFor="duration">Duração (minutos) *</label>
             <input
-              type="text"
+              type="number"
               id="duration"
               name="duration"
-              value={formData.duration}
+              value={formData.duration || ''}
               onChange={handleChange}
-              placeholder="Ex: 1h 30min"
+              placeholder="Ex: 90 (para 1h30min)"
+              min="1"
+              className={errors.duration ? styles.inputError : ''}
             />
+            <span className={styles.hint}>
+              {formData.duration > 0 && `≈ ${Math.floor(formData.duration / 60)}h ${formData.duration % 60}min`}
+            </span>
+            {errors.duration && <span className={styles.error}>{errors.duration}</span>}
           </div>
 
           <div className={styles.formGroup}>

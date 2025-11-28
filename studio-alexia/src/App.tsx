@@ -5,6 +5,10 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import Unauthorized from './pages/Unauthorized';
+import { AuthContextProvider } from './contexts/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function AppContent() {
   useScrollToHash();
@@ -15,7 +19,16 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicos" element={<ServicesPage />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+         <Route path="/login" element={<Login />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>
@@ -25,7 +38,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <AuthContextProvider>
+        <AppContent />
+      </AuthContextProvider>
     </Router>
   );
 }

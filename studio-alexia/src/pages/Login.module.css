@@ -1,0 +1,136 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--bg-main) 100%);
+  padding: 2rem;
+}
+
+.content {
+  background: var(--card-bg);
+  border: 1px solid var(--gold-20);
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px var(--black-80);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.lockIcon {
+  width: 80px;
+  height: 80px;
+  color: var(--gold);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-soft);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.googleButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--bg-main);
+  color: var(--text-light);
+  border: 2px solid var(--gold-30);
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--black-50);
+}
+
+.googleButton:hover {
+  border-color: var(--gold);
+  background: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--gold-30);
+}
+
+.googleButton:active {
+  transform: translateY(0);
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.info {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  color: var(--text-soft);
+  font-style: italic;
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .content {
+    padding: 2rem 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .lockIcon {
+    width: 60px;
+    height: 60px;
+  }
+}

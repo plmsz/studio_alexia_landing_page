@@ -67,6 +67,22 @@
   transition: opacity 0.3s;
 }
 
+.btnLogin {
+  background-color: var(--secondary);
+  color: var(--text-light);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
 .btnAdd:hover {
   opacity: 0.85;
 }

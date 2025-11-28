@@ -1,17 +1,26 @@
+import googleIconImg from '../assets/img/google-icon.svg';
 import { useState, useEffect } from 'react';
 import { servicesApi } from '../services/api';
 import type { Service } from '../types/service';
 import ServicesList from '../components/Admin/ServicesList';
 import ServiceForm from '../components/Admin/ServiceForm';
 import styles from '../components/Admin/Admin.module.css';
+import { useAuth } from '../hooks/useAuth';
 
 const Dashboard = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
-  const [editingService, setEditingService] = useState<Service | undefined>(undefined);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [editingService, setEditingService] = useState<Service | undefined>(
+    undefined
+  );
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
+
+  const { user, signInWithGoogle } = useAuth();
 
   const fetchServices = async () => {
     try {
@@ -66,7 +75,7 @@ const Dashboard = () => {
         await servicesApi.create(serviceData);
         showMessage('success', 'Serviço criado com sucesso!');
       }
-      
+
       setShowForm(false);
       setEditingService(undefined);
       await fetchServices();
@@ -93,6 +102,26 @@ const Dashboard = () => {
     return (
       <div className={styles.container}>
         <div className={styles.error}>{error}</div>
+      </div>
+    );
+  }
+
+  async function handleSignIn() {
+    if (!user) {
+      await signInWithGoogle();
+    }
+  }
+
+  if (!user) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.header}>
+          Você não tem permissão para acessar o conteúdo desta página.
+          <button onClick={handleSignIn} className={styles.btnLogin}>
+            <img src={googleIconImg} alt="" />
+            Faça login com sua conta Google
+          </button>
+        </div>
       </div>
     );
   }

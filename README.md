@@ -74,9 +74,9 @@ Acesse a versão online em: [Studio Alexia Menezes - Landing Page](https://plmsz
 </div>
 
 #TODO 
-- [ ] verificar maxleng de descrição e legenda da foto
+- [ ] Responsividade do dashboard
+- [ ] feature de agendamento
 - [ ] Backend json - hospedar
-- [ ] SEO
-- [ ] Responsividade
-- [ ] Autenticação 
 - [ ] Hospedar no Netlify
+
+- [ ] SEO e usar analytcs

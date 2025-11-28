@@ -30,18 +30,20 @@ const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
         <tbody>
           {services.map((service) => (
             <tr key={service.id}>
-              <td>{service.title}</td>
-              <td className={styles.description}>{service.description}</td>
-              <td>{formatPrice(service.price)}</td>
-              <td>{formatDuration(service.duration)}</td>
-              <td>
+              <td data-label="Título">{service.title}</td>
+              <td data-label="Descrição" className={styles.description}>
+                {service.description}
+              </td>
+              <td data-label="Preço">{formatPrice(service.price)}</td>
+              <td data-label="Duração">{formatDuration(service.duration)}</td>
+              <td data-label="Destacado">
                 {service.featured ? (
                   <span className={styles.badge}>Sim</span>
                 ) : (
                   <span className={styles.badgeNo}>Não</span>
                 )}
               </td>
-              <td>
+              <td data-label="Ações">
                 <div className={styles.actions}>
                   <button
                     type="button"

@@ -1,5 +1,6 @@
 import type { Service } from '../../types/service';
 import { formatPrice, formatDuration } from '../../utils/formatUtils';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 import styles from './Services.module.css';
 
 interface ServiceCardProps extends Service {
@@ -7,14 +8,17 @@ interface ServiceCardProps extends Service {
 }
 
 const ServiceCard = ({ title, description, image, imageAlt, price, duration, index }: ServiceCardProps) => {
+  const { elementRef, isVisible } = useScrollAnimation(index);
   const isMobile = window.innerWidth <= 820;
-  const animationClass = isMobile ? styles.reveal : styles.desktopReveal;
-  const style = !isMobile ? { animationDelay: `${index * 300}ms` } : {};
-
+  
   const showPriceOrDuration = price || duration;
 
   return (
-    <div className={`${styles.servicoItem} ${animationClass}`} style={style}>
+    <div 
+      ref={elementRef}
+      className={`${styles.servicoItem} ${isMobile && index > 0 ? styles.reveal : ''} ${isVisible ? styles.active : ''} ${!isMobile ? styles.desktopReveal : ''}`}
+      style={!isMobile ? { animationDelay: `${index * 300}ms` } : {}}
+    >
       <h2>{title}</h2>
       <img src={image} alt={imageAlt} />
       <p>{description}</p>

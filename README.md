@@ -74,7 +74,7 @@ Acesse a versão online em: [Studio Alexia Menezes - Landing Page](https://plmsz
 </div>
 
 #TODO 
-- [] verificar maxleng de descrição e legenda da foto
+- [ ] verificar maxleng de descrição e legenda da foto
 - [ ] Backend json - hospedar
 - [ ] SEO
 - [ ] Responsividade

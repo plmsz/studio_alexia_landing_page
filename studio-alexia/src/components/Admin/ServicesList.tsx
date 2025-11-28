@@ -14,13 +14,11 @@ const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
       onDelete(id);
     }
   };
-
   return (
     <div className={styles.servicesList}>
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>ID</th>
             <th>Título</th>
             <th>Descrição</th>
             <th>Preço</th>

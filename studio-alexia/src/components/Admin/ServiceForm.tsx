@@ -190,7 +190,7 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              maxLength={500}
+              maxLength={300}
               className={errors.description ? styles.inputError : ''}
             />
             {errors.description && <span className={styles.error}>{errors.description}</span>}

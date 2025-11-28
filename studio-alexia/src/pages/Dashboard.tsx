@@ -100,7 +100,7 @@ const Dashboard = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1>Dashboard - Gerenciar Serviços</h1>
+        <h1>Gerenciar Serviços</h1>
         <button type="button" onClick={handleCreate} className={styles.btnAdd}>
           + Adicionar Serviço
         </button>

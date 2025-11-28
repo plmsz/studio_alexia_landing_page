@@ -1,13 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useScrollToHash } from './hooks/useScrollToHash';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';
 
-function App() {
+function AppContent() {
+  useScrollToHash();
+
   return (
-    <Router>
+    <>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -15,6 +18,14 @@ function App() {
         <Route path="/admin" element={<Dashboard />} />
       </Routes>
       <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

@@ -90,5 +90,15 @@
       "price": 100,
       "duration": 60
     }
+  ],
+  "appointments": [
+    {
+      "id": "87e7",
+      "serviceId": "9",
+      "startTime": "2025-12-08T12:30:00.000Z",
+      "endTime": "2025-12-08T13:15:00.000Z",
+      "clientName": "Ana Banana",
+      "clientContact": "75 982544654"
+    }
   ]
 }

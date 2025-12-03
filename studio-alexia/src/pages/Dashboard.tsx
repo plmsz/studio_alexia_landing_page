@@ -4,10 +4,14 @@ import { servicesApi } from '../services/api';
 import type { Service } from '../types/service';
 import ServicesList from '../components/Admin/ServicesList';
 import ServiceForm from '../components/Admin/ServiceForm';
+import AppointmentsList from '../components/Admin/AppointmentsList';
 import styles from '../components/Admin/Admin.module.css';
 import { useAuth } from '../hooks/useAuth';
 
+type TabType = 'services' | 'appointments';
+
 const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState<TabType>('services');
   const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -128,32 +132,53 @@ const Dashboard = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h1>Gerenciar Serviços</h1>
-        <button type="button" onClick={handleCreate} className={styles.btnAdd}>
-          + Adicionar Serviço
+      <div className={styles.tabsContainer}>
+        <button
+          className={`${styles.tab} ${activeTab === 'services' ? styles.active : ''}`}
+          onClick={() => setActiveTab('services')}
+        >
+          Serviços
+        </button>
+        <button
+          className={`${styles.tab} ${activeTab === 'appointments' ? styles.active : ''}`}
+          onClick={() => setActiveTab('appointments')}
+        >
+          Agendamentos
         </button>
       </div>
 
-      {message && (
-        <div className={`${styles.message} ${styles[message.type]}`}>
-          {message.text}
-        </div>
+      {activeTab === 'services' && (
+        <>
+          <div className={styles.header}>
+            <h1>Gerenciar Serviços</h1>
+            <button type="button" onClick={handleCreate} className={styles.btnAdd}>
+              + Adicionar Serviço
+            </button>
+          </div>
+
+          {message && (
+            <div className={`${styles.message} ${styles[message.type]}`}>
+              {message.text}
+            </div>
+          )}
+
+          <ServicesList
+            services={services}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+
+          {showForm && (
+            <ServiceForm
+              service={editingService}
+              onSubmit={handleSubmit}
+              onCancel={handleCancel}
+            />
+          )}
+        </>
       )}
 
-      <ServicesList
-        services={services}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-
-      {showForm && (
-        <ServiceForm
-          service={editingService}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-        />
-      )}
+      {activeTab === 'appointments' && <AppointmentsList />}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import Unauthorized from './pages/Unauthorized';
+import AppointmentForm from './components/Appointment/AppointmentForm';
 import { AuthContextProvider } from './contexts/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
@@ -19,6 +20,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicos" element={<ServicesPage />} />
+        <Route path="/agendar" element={<AppointmentForm />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
          <Route path="/login" element={<Login />} />
         <Route

@@ -13,6 +13,7 @@ const Header = () => {
           <a href="#horarios">Horário</a>
           <a href="#contato">Contato</a>
           <a href="#localizacao">Localização</a>
+          <Link to="/agendar">Agende</Link>
         </>
       ) : (
         <>
@@ -21,6 +22,7 @@ const Header = () => {
           <a href="/#horarios">Horário</a>
           <a href="/#contato">Contato</a>
           <a href="/#localizacao">Localização</a>
+          <Link to="/agendar">Agende</Link>
         </>
       )}
     </header>

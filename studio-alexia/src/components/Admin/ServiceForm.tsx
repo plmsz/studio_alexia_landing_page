@@ -296,6 +296,9 @@ const ServiceForm = ({ service, onSubmit, onCancel }: ServiceFormProps) => {
             <span className={styles.hint}>
               {formData.duration > 0 && `≈ ${Math.floor(formData.duration / 60)}h ${formData.duration % 60}min`}
             </span>
+            <span className={styles.hint} style={{ color: '#666', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block' }}>
+              💡 Inclua o tempo de preparo e intervalo entre clientes na duração total
+            </span>
             {errors.duration && <span className={styles.error}>{errors.duration}</span>}
           </div>
 

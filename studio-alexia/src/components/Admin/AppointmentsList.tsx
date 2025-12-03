@@ -3,6 +3,7 @@ import { appointmentsApi, servicesApi } from '../../services/api';
 import type { Appointment } from '../../types/appointment';
 import type { Service } from '../../types/service';
 import { formatDateTime, formatDate, formatTime } from '../../utils/scheduleUtils';
+import Modal from '../common/Modal';
 import styles from './Admin.module.css';
 
 const AppointmentsList = () => {
@@ -11,10 +12,27 @@ const AppointmentsList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filterDate, setFilterDate] = useState('');
-  const [message, setMessage] = useState<{
-    type: 'success' | 'error';
-    text: string;
-  } | null>(null);
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    appointmentId: string | null;
+  }>({
+    isOpen: false,
+    appointmentId: null,
+  });
+  const [successModal, setSuccessModal] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: '',
+  });
+  const [errorModal, setErrorModal] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: '',
+  });
 
   useEffect(() => {
     loadData();
@@ -38,24 +56,44 @@ const AppointmentsList = () => {
     }
   };
 
-  const showMessage = (type: 'success' | 'error', text: string) => {
-    setMessage({ type, text });
-    setTimeout(() => setMessage(null), 3000);
+  const handleDeleteClick = (id: string) => {
+    setDeleteModal({
+      isOpen: true,
+      appointmentId: id,
+    });
   };
 
-  const handleDelete = async (id: string) => {
-    if (!window.confirm('Tem certeza que deseja cancelar este agendamento?')) {
-      return;
+  const handleConfirmDelete = async () => {
+    if (deleteModal.appointmentId) {
+      try {
+        await appointmentsApi.delete(deleteModal.appointmentId);
+        await loadData();
+        setDeleteModal({ isOpen: false, appointmentId: null });
+        setSuccessModal({
+          isOpen: true,
+          message: 'Agendamento cancelado com sucesso!',
+        });
+      } catch (err) {
+        setDeleteModal({ isOpen: false, appointmentId: null });
+        setErrorModal({
+          isOpen: true,
+          message: 'Erro ao cancelar agendamento',
+        });
+        console.error('Erro ao deletar:', err);
+      }
     }
+  };
 
-    try {
-      await appointmentsApi.delete(id);
-      await loadData();
-      showMessage('success', 'Agendamento cancelado com sucesso!');
-    } catch (err) {
-      showMessage('error', 'Erro ao cancelar agendamento');
-      console.error('Erro ao deletar:', err);
-    }
+  const handleCloseDeleteModal = () => {
+    setDeleteModal({ isOpen: false, appointmentId: null });
+  };
+
+  const handleCloseSuccessModal = () => {
+    setSuccessModal({ isOpen: false, message: '' });
+  };
+
+  const handleCloseErrorModal = () => {
+    setErrorModal({ isOpen: false, message: '' });
   };
 
   const getServiceName = (serviceId: number): string => {
@@ -125,12 +163,6 @@ const AppointmentsList = () => {
         </div>
       </div>
 
-      {message && (
-        <div className={`${styles.message} ${styles[message.type]}`}>
-          {message.text}
-        </div>
-      )}
-
       {upcomingAppointments.length > 0 && (
         <div className={styles.appointmentsSection}>
           <h3>Próximos Agendamentos ({upcomingAppointments.length})</h3>
@@ -157,7 +189,7 @@ const AppointmentsList = () => {
                 <div className={styles.appointmentActions}>
                   <button
                     onClick={() =>
-                      appointment.id && handleDelete(appointment.id)
+                      appointment.id && handleDeleteClick(appointment.id)
                     }
                     className={styles.btnDelete}
                   >
@@ -206,6 +238,36 @@ const AppointmentsList = () => {
             : 'Nenhum agendamento encontrado'}
         </div>
       )}
+
+      <Modal
+        isOpen={deleteModal.isOpen}
+        onClose={handleCloseDeleteModal}
+        title="Confirmar Cancelamento"
+        message="Tem certeza que deseja cancelar este agendamento?"
+        type="warning"
+        confirmText="Cancelar Agendamento"
+        cancelText="Voltar"
+        onConfirm={handleConfirmDelete}
+        showCancel={true}
+      />
+
+      <Modal
+        isOpen={successModal.isOpen}
+        onClose={handleCloseSuccessModal}
+        title="Sucesso!"
+        message={successModal.message}
+        type="success"
+        confirmText="OK"
+      />
+
+      <Modal
+        isOpen={errorModal.isOpen}
+        onClose={handleCloseErrorModal}
+        title="Erro"
+        message={errorModal.message}
+        type="error"
+        confirmText="OK"
+      />
     </div>
   );
 };

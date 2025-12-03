@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import type { Service } from '../../types/service';
 import { formatPrice, formatDuration } from '../../utils/formatUtils';
+import Modal from '../common/Modal';
 import styles from './Admin.module.css';
 
 interface ServicesListProps {
@@ -9,63 +11,100 @@ interface ServicesListProps {
 }
 
 const ServicesList = ({ services, onEdit, onDelete }: ServicesListProps) => {
-  const handleDelete = (id: number, title: string) => {
-    if (window.confirm(`Tem certeza que deseja deletar "${title}"?`)) {
-      onDelete(id);
+  const [deleteModal, setDeleteModal] = useState<{
+    isOpen: boolean;
+    serviceId: number | null;
+    serviceName: string;
+  }>({
+    isOpen: false,
+    serviceId: null,
+    serviceName: '',
+  });
+
+  const handleDeleteClick = (id: number, title: string) => {
+    setDeleteModal({
+      isOpen: true,
+      serviceId: id,
+      serviceName: title,
+    });
+  };
+
+  const handleConfirmDelete = () => {
+    if (deleteModal.serviceId !== null) {
+      onDelete(deleteModal.serviceId);
+      setDeleteModal({ isOpen: false, serviceId: null, serviceName: '' });
     }
   };
+
+  const handleCloseModal = () => {
+    setDeleteModal({ isOpen: false, serviceId: null, serviceName: '' });
+  };
   return (
-    <div className={styles.servicesList}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-            <th>Duração</th>
-            <th>Destacado</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {services.map((service) => (
-            <tr key={service.id}>
-              <td data-label="Título">{service.title}</td>
-              <td data-label="Descrição" className={styles.description}>
-                {service.description}
-              </td>
-              <td data-label="Preço">{formatPrice(service.price)}</td>
-              <td data-label="Duração">{formatDuration(service.duration)}</td>
-              <td data-label="Destacado">
-                {service.featured ? (
-                  <span className={styles.badge}>Sim</span>
-                ) : (
-                  <span className={styles.badgeNo}>Não</span>
-                )}
-              </td>
-              <td data-label="Ações">
-                <div className={styles.actions}>
-                  <button
-                    type="button"
-                    onClick={() => onEdit(service)}
-                    className={styles.btnEdit}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDelete(service.id, service.title)}
-                    className={styles.btnDelete}
-                  >
-                    Deletar
-                  </button>
-                </div>
-              </td>
+    <>
+      <div className={styles.servicesList}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Duração</th>
+              <th>Destacado</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {services.map((service) => (
+              <tr key={service.id}>
+                <td data-label="Título">{service.title}</td>
+                <td data-label="Descrição" className={styles.description}>
+                  {service.description}
+                </td>
+                <td data-label="Preço">{formatPrice(service.price)}</td>
+                <td data-label="Duração">{formatDuration(service.duration)}</td>
+                <td data-label="Destacado">
+                  {service.featured ? (
+                    <span className={styles.badge}>Sim</span>
+                  ) : (
+                    <span className={styles.badgeNo}>Não</span>
+                  )}
+                </td>
+                <td data-label="Ações">
+                  <div className={styles.actions}>
+                    <button
+                      type="button"
+                      onClick={() => onEdit(service)}
+                      className={styles.btnEdit}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteClick(service.id, service.title)}
+                      className={styles.btnDelete}
+                    >
+                      Deletar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <Modal
+        isOpen={deleteModal.isOpen}
+        onClose={handleCloseModal}
+        title="Confirmar Exclusão"
+        message={`Tem certeza que deseja deletar "${deleteModal.serviceName}"?`}
+        type="warning"
+        confirmText="Deletar"
+        cancelText="Cancelar"
+        onConfirm={handleConfirmDelete}
+        showCancel={true}
+      />
+    </>
   );
 };
 

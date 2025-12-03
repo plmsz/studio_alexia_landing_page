@@ -22,7 +22,11 @@ const workingHours: WorkingHours[] = [
 
 const SLOT_DURATION_MINUTES = 30;
 
-export const generateTimeSlots = (date: Date, appointments: Appointment[]): TimeSlot[] => {
+export const generateTimeSlots = (
+  date: Date, 
+  appointments: Appointment[], 
+  serviceDuration?: number
+): TimeSlot[] => {
   const slots: TimeSlot[] = [];
   const dayOfWeek = date.getDay();
   const workingDay = workingHours.find(wh => wh.dayOfWeek === dayOfWeek);
@@ -30,6 +34,8 @@ export const generateTimeSlots = (date: Date, appointments: Appointment[]): Time
   if (!workingDay) {
     return slots;
   }
+
+  const durationToCheck = serviceDuration || SLOT_DURATION_MINUTES;
 
   for (const period of workingDay.periods) {
     const [startHour, startMinute] = period.start.split(':').map(Number);
@@ -45,15 +51,17 @@ export const generateTimeSlots = (date: Date, appointments: Appointment[]): Time
 
     while (currentTime < endTime) {
       const slotEnd = new Date(currentTime.getTime() + SLOT_DURATION_MINUTES * 60000);
+      const serviceEnd = new Date(currentTime.getTime() + durationToCheck * 60000);
+
+      if (serviceEnd > endTime) {
+        currentTime = slotEnd;
+        continue;
+      }
 
       const isAvailable = !appointments.some(apt => {
         const aptStart = new Date(apt.startTime);
         const aptEnd = new Date(apt.endTime);
-        return (
-          (currentTime >= aptStart && currentTime < aptEnd) ||
-          (slotEnd > aptStart && slotEnd <= aptEnd) ||
-          (currentTime <= aptStart && slotEnd >= aptEnd)
-        );
+        return currentTime < aptEnd && serviceEnd > aptStart;
       });
 
       const isPastTime = currentTime < new Date();

@@ -5,10 +5,12 @@ import type { Appointment } from '../../types/appointment';
 import {
   generateTimeSlots,
   formatTime,
+  formatDate,
   getMinDate,
   getMaxDate,
   isWorkingDay,
 } from '../../utils/scheduleUtils';
+import Modal from '../common/Modal';
 import styles from './AppointmentForm.module.css';
 
 const AppointmentForm = () => {
@@ -25,10 +27,25 @@ const AppointmentForm = () => {
   const [clientContact, setClientContact] = useState('');
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{
-    type: 'success' | 'error';
-    text: string;
-  } | null>(null);
+  const [successModal, setSuccessModal] = useState<{
+    isOpen: boolean;
+    data: {
+      date: string;
+      time: string;
+      serviceName: string;
+      duration: number;
+    } | null;
+  }>({
+    isOpen: false,
+    data: null,
+  });
+  const [errorModal, setErrorModal] = useState<{
+    isOpen: boolean;
+    message: string;
+  }>({
+    isOpen: false,
+    message: '',
+  });
 
   useEffect(() => {
     loadServices();
@@ -41,19 +58,30 @@ const AppointmentForm = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    if (selectedDate && appointments) {
+    if (selectedDate && appointments && selectedService) {
+      const date = new Date(selectedDate + 'T00:00:00');
+      const slots = generateTimeSlots(
+        date,
+        appointments,
+        selectedService.duration
+      );
+      setTimeSlots(slots);
+    } else if (selectedDate && appointments) {
       const date = new Date(selectedDate + 'T00:00:00');
       const slots = generateTimeSlots(date, appointments);
       setTimeSlots(slots);
     }
-  }, [selectedDate, appointments]);
+  }, [selectedDate, appointments, selectedService]);
 
   const loadServices = async () => {
     try {
       const data = await servicesApi.getAll();
       setServices(data);
     } catch (err) {
-      showMessage('error', 'Erro ao carregar serviços');
+      setErrorModal({
+        isOpen: true,
+        message: 'Erro ao carregar serviços',
+      });
       console.error('Erro ao buscar serviços:', err);
     }
   };
@@ -68,11 +96,6 @@ const AppointmentForm = () => {
     }
   };
 
-  const showMessage = (type: 'success' | 'error', text: string) => {
-    setMessage({ type, text });
-    setTimeout(() => setMessage(null), 5000);
-  };
-
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const date = e.target.value;
     setSelectedDate(date);
@@ -81,16 +104,30 @@ const AppointmentForm = () => {
     if (date) {
       const selectedDateObj = new Date(date + 'T00:00:00');
       if (!isWorkingDay(selectedDateObj)) {
-        showMessage('error', 'O dia selecionado não é um dia de trabalho');
+        setErrorModal({
+          isOpen: true,
+          message: 'O dia selecionado não é um dia de trabalho',
+        });
       }
     }
+  };
+
+  const handleCloseSuccessModal = () => {
+    setSuccessModal({ isOpen: false, data: null });
+  };
+
+  const handleCloseErrorModal = () => {
+    setErrorModal({ isOpen: false, message: '' });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!selectedService || !selectedTime || !clientName || !clientContact) {
-      showMessage('error', 'Preencha todos os campos obrigatórios');
+      setErrorModal({
+        isOpen: true,
+        message: 'Preencha todos os campos obrigatórios',
+      });
       return;
     }
 
@@ -111,7 +148,17 @@ const AppointmentForm = () => {
 
       await appointmentsApi.create(appointment);
 
-      showMessage('success', 'Agendamento realizado com sucesso!');
+      const appointmentDate = new Date(selectedDate + 'T00:00:00');
+
+      setSuccessModal({
+        isOpen: true,
+        data: {
+          date: formatDate(appointmentDate),
+          time: formatTime(selectedTime),
+          serviceName: selectedService.title,
+          duration: selectedService.duration,
+        },
+      });
 
       setSelectedService(null);
       setSelectedDate('');
@@ -123,7 +170,10 @@ const AppointmentForm = () => {
         await loadAppointments(selectedDate);
       }
     } catch (err) {
-      showMessage('error', 'Erro ao realizar agendamento. Tente novamente.');
+      setErrorModal({
+        isOpen: true,
+        message: 'Erro ao realizar agendamento. Tente novamente.',
+      });
       console.error('Erro ao criar agendamento:', err);
     } finally {
       setLoading(false);
@@ -133,11 +183,6 @@ const AppointmentForm = () => {
   return (
     <div className={styles.container}>
       <h2>Agende seu Horário</h2>
-      {message && (
-        <div className={`${styles.message} ${styles[message.type]}`}>
-          {message.text}
-        </div>
-      )}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="service">Serviço *</label>
@@ -247,6 +292,46 @@ const AppointmentForm = () => {
           {loading ? 'Agendando...' : 'Confirmar Agendamento'}
         </button>
       </form>
+
+      <Modal
+        isOpen={successModal.isOpen}
+        onClose={handleCloseSuccessModal}
+        title="Agendamento Confirmado!"
+        type="success"
+        confirmText="Fechar"
+      >
+        {successModal.data && (
+          <div style={{ textAlign: 'left', marginTop: '1rem' }}>
+            <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
+              <span style={{ marginRight: '0.5rem' }}>
+                <img height="24px" src="/src/assets/img/calendar.svg" alt="" />
+              </span>
+              {successModal.data.date} às {successModal.data.time}
+            </p>
+            <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
+              <span style={{ marginRight: '0.5rem' }}>
+                <img height="24px" src="/src/assets/img/paint.svg" alt="" />
+              </span>
+              {successModal.data.serviceName}
+            </p>
+            <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
+              <span style={{ marginRight: '0.5rem' }}>
+                <img height="24px" src="/src/assets/img/time.svg" alt="" />
+              </span>
+              Duração: {successModal.data.duration} minutos
+            </p>
+          </div>
+        )}
+      </Modal>
+
+      <Modal
+        isOpen={errorModal.isOpen}
+        onClose={handleCloseErrorModal}
+        title="Erro"
+        message={errorModal.message}
+        type="error"
+        confirmText="OK"
+      />
     </div>
   );
 };

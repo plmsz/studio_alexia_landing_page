@@ -12,6 +12,9 @@ import {
 } from '../../utils/scheduleUtils';
 import Modal from '../common/Modal';
 import styles from './AppointmentForm.module.css';
+import calendarIcon from '../../assets/img/calendar.svg';
+import paintIcon from '../../assets/img/paint.svg';
+import timeIcon from '../../assets/img/time.svg';
 
 const AppointmentForm = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -304,19 +307,19 @@ const AppointmentForm = () => {
           <div style={{ textAlign: 'left', marginTop: '1rem' }}>
             <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
               <span style={{ marginRight: '0.5rem' }}>
-                <img height="24px" src="/src/assets/img/calendar.svg" alt="" />
+                <img height="24px" src={calendarIcon} alt="" />
               </span>
               {successModal.data.date} às {successModal.data.time}
             </p>
             <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
               <span style={{ marginRight: '0.5rem' }}>
-                <img height="24px" src="/src/assets/img/paint.svg" alt="" />
+                <img height="24px" src={paintIcon} alt="" />
               </span>
               {successModal.data.serviceName}
             </p>
             <p style={{ margin: '0.5rem 0', fontSize: '1rem' }}>
               <span style={{ marginRight: '0.5rem' }}>
-                <img height="24px" src="/src/assets/img/time.svg" alt="" />
+                <img height="24px" src={timeIcon} alt="" />
               </span>
               Duração: {successModal.data.duration} minutos
             </p>

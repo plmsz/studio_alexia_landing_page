@@ -192,7 +192,7 @@ firebase deploy
 - [ ] Integração com calendário Google
 - [ ] Sistema de avaliações de clientes
 - [ ] Galeria de trabalhos realizados
-- [ ] Sistema de cupons de desconto
+
 
 ---
 

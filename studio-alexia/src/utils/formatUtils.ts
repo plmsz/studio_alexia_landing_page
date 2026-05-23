@@ -36,3 +36,23 @@ export const formatDuration = (minutes: number): string => {
     return `${mins}min`;
   }
 };
+
+/**
+ * Gera um link do WhatsApp com o número de telefone formatado.
+ * Assume que, se não houver código de país, o número é do Brasil (prefixo 55).
+ * @param phone - Número de telefone a ser formatado.
+ * @returns URL do WhatsApp formatado.
+ */
+export const getWhatsAppLink = (phone: string): string => {
+  const cleanedPhone = phone.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
+  let formattedPhone = cleanedPhone;
+
+  // Se o número não começa com "55" e tem um tamanho razoável para um número local,
+  // prefixa com "55". Esta lógica pode precisar ser mais sofisticada
+  // para lidar com números internacionais ou de outros países de forma mais robusta.
+  if (!cleanedPhone.startsWith("55") && cleanedPhone.length >= 8 && cleanedPhone.length <= 11) {
+    formattedPhone = `55${cleanedPhone}`;
+  }
+
+  return `https://wa.me/${formattedPhone}`;
+};

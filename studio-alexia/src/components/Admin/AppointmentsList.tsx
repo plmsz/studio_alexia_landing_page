@@ -3,6 +3,8 @@ import { appointmentsApi, servicesApi } from '../../services/api';
 import type { Appointment } from '../../types/appointment';
 import type { Service } from '../../types/service';
 import { formatDateTime, formatDate, formatTime } from '../../utils/scheduleUtils';
+import { getWhatsAppLink } from '../../utils/formatUtils';
+import whatsappIcon from '../../assets/img/whatsapp-svgrepo-com.svg';
 import Modal from '../common/Modal';
 import styles from './Admin.module.css';
 
@@ -173,7 +175,7 @@ const AppointmentsList = () => {
                   <h4>{getServiceName(appointment.serviceId)}</h4>
                   <div>
                     <span className={styles.appointmentDate}>
-                      {formatDateTime(new Date(appointment.startTime))} até &nbsp;
+                      {formatDateTime(new Date(appointment.startTime))} até &
                        {formatTime(new Date(appointment.endTime))}
                     </span>
                   </div>
@@ -183,7 +185,15 @@ const AppointmentsList = () => {
                     <strong>Cliente:</strong> {appointment.clientName}
                   </p>
                   <p>
-                    <strong>Contato:</strong> {appointment.clientContact}
+                    <strong>Contato:</strong> <a
+                      href={getWhatsAppLink(appointment.clientContact)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.whatsappLink}
+                    >
+                      {appointment.clientContact}
+                      <img src={whatsappIcon} alt="WhatsApp" className={styles.whatsappIcon} />
+                    </a>
                   </p>
                 </div>
                 <div className={styles.appointmentActions}>
@@ -222,7 +232,15 @@ const AppointmentsList = () => {
                     <strong>Cliente:</strong> {appointment.clientName}
                   </p>
                   <p>
-                    <strong>Contato:</strong> {appointment.clientContact}
+                    <strong>Contato:</strong> <a
+                      href={getWhatsAppLink(appointment.clientContact)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.whatsappLink} ${styles.pastLink}`}
+                    >
+                      {appointment.clientContact}
+                      <img src={whatsappIcon} alt="WhatsApp" className={styles.whatsappIcon} />
+                    </a>
                   </p>
                 </div>
               </div>

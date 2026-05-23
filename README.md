@@ -8,33 +8,37 @@ Aplicação web completa desenvolvida como Projeto de Extensão III em Ciência 
 
 Desenvolver uma aplicação web moderna e responsiva que:
 
-* Apresente os serviços do estúdio (sobrancelhas, cílios, unhas e estética facial)
-* Facilite o agendamento online de serviços
-* Gerencie agendamentos através de painel administrativo
-* Integre contato via WhatsApp e Instagram
-* Exiba horários de atendimento e localização
-* Seja mobile-first, com design elegante e paleta terrosa (vinho, marrom, dourado e preto)
+- Apresente os serviços do estúdio (sobrancelhas, cílios, unhas e estética facial)
+- Facilite o agendamento online de serviços
+- Gerencie agendamentos através de painel administrativo
+- Integre contato via WhatsApp e Instagram
+- Exiba horários de atendimento e localização
+- Seja mobile-first, com design elegante e paleta terrosa (vinho, marrom, dourado e preto)
 
 ## 🚀 Tecnologias
 
 ### Frontend
-* **React 19** - Biblioteca JavaScript para construção de interfaces
-* **TypeScript** - Superset JavaScript com tipagem estática
-* **Vite** - Build tool e dev server de alta performance
-* **React Router DOM** - Gerenciamento de rotas
-* **CSS Modules** - Estilização com escopo local
+
+- **React 19** - Biblioteca JavaScript para construção de interfaces
+- **TypeScript** - Superset JavaScript com tipagem estática
+- **Vite** - Build tool e dev server de alta performance
+- **React Router DOM** - Gerenciamento de rotas
+- **CSS Modules** - Estilização com escopo local
 
 ### Backend & Database
-* **Firebase** - Autenticação e banco de dados
-* **JSON Server** - Mock de API REST para desenvolvimento
+
+- **Firebase** - Autenticação e banco de dados
+- **JSON Server** - Mock de API REST para desenvolvimento
 
 ### Bibliotecas
-* **Axios** - Cliente HTTP para requisições
-* **Day.js** - Manipulação de datas
+
+- **Axios** - Cliente HTTP para requisições
+- **Day.js** - Manipulação de datas
 
 ### Ferramentas de Desenvolvimento
-* **ESLint** - Linter para qualidade de código
-* **TypeScript ESLint** - Regras específicas para TypeScript
+
+- **ESLint** - Linter para qualidade de código
+- **TypeScript ESLint** - Regras específicas para TypeScript
 
 ## 📁 Estrutura do Projeto
 
@@ -70,28 +74,30 @@ PEX3/
 ## 🛠️ Funcionalidades
 
 ### Para Clientes
-* ✅ Visualização de serviços disponíveis
-* ✅ Agendamento online de serviços
-* ✅ Confirmação de agendamento por modal
-* ✅ Contato direto via WhatsApp e Instagram
-* ✅ Visualização de horários de atendimento
-* ✅ Localização do estúdio
-* ✅ Interface responsiva (mobile-first)
+
+- ✅ Visualização de serviços disponíveis
+- ✅ Agendamento online de serviços
+- ✅ Confirmação de agendamento por modal
+- ✅ Contato direto via WhatsApp e Instagram
+- ✅ Visualização de horários de atendimento
+- ✅ Localização do estúdio
+- ✅ Interface responsiva (mobile-first)
 
 ### Para Administradores
-* ✅ Autenticação via Google (Firebase)
-* ✅ Painel administrativo protegido
-* ✅ Gerenciamento de agendamentos
-* ✅ Cadastro e edição de serviços
-* ✅ Controle de acesso baseado em e-mail autorizado
+
+- ✅ Autenticação via Google (Firebase)
+- ✅ Painel administrativo protegido
+- ✅ Gerenciamento de agendamentos
+- ✅ Cadastro e edição de serviços
+- ✅ Controle de acesso baseado em e-mail autorizado
 
 ## 🚦 Como Executar o Projeto
 
 ### Pré-requisitos
 
-* **Node.js** (versão 18 ou superior)
-* **npm** ou **yarn**
-* Conta no **Firebase** (para autenticação)
+- **Node.js** (versão 18 ou superior)
+- **npm** ou **yarn**
+- Conta no **Firebase** (para autenticação)
 
 ### 1. Clone o repositório
 
@@ -158,23 +164,26 @@ npm run json-server  # Inicia o JSON Server na porta 3001
 O projeto utiliza **Firebase Authentication** para login via Google. O acesso ao painel administrativo é restrito aos e-mails configurados na variável de ambiente `VITE_ADMIN_EMAILS`.
 
 ### Fluxo de Autenticação
+
 1. Usuário faz login com conta Google
 2. Sistema verifica se o e-mail está na lista de administradores
 3. Acesso concedido ou negado baseado na autorização
 
 ## 🎨 Design e UX
 
-* **Mobile-First**: Design otimizado para dispositivos móveis
-* **Paleta de Cores**: Tons terrosos (vinho, marrom, dourado e preto)
-* **Animações**: Efeitos suaves de scroll e transições
-* **Acessibilidade**: Estrutura semântica e navegação intuitiva
+- **Mobile-First**: Design otimizado para dispositivos móveis
+- **Paleta de Cores**: Tons terrosos (vinho, marrom, dourado e preto)
+- **Animações**: Efeitos suaves de scroll e transições
+- **Acessibilidade**: Estrutura semântica e navegação intuitiva
 
 ## 🌐 Deploy
 
 ### Vercel (Frontend)
+
 O projeto pode ser publicado no Vercel. Configure nas Settings do repositório.
 
 ### Firebase Hosting (Recomendado)
+
 Para deploy completo com Firebase:
 
 ```bash
@@ -192,7 +201,10 @@ firebase deploy
 - [ ] Integração com calendário Google
 - [ ] Sistema de avaliações de clientes
 - [ ] Galeria de trabalhos realizados
-
+- [ ] Sistema de pagamento online
+- [ ] Blog para marketing de conteúdo
+- [ ] Funcionalidades de CRM para gestão do relacionamento com os clientes, plataforma poderá explorar a automatização de envio dessas mensagens via robôs de WhatsApp (API oficial)
+- [ ] Integração de um painel de métricas (Dashboards) para visualização do faturamento e dos serviços mais procurados no mês.
 
 ---
 

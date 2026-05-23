@@ -308,7 +308,7 @@
   font-weight: normal !important;
 }
 
-.checkboxLabel input[type='checkbox'] {
+.checkboxLabel input[type=\'checkbox\'] {
   width: auto;
   cursor: pointer;
 }
@@ -769,4 +769,28 @@
   .uploadText {
     font-size: 0.9rem;
   }
+}
+
+/* WhatsApp Link */
+.whatsappLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #25D366; /* Cor padrão do WhatsApp */
+  transition: text-decoration 0.3s ease-in-out;
+}
+
+.whatsappLink:hover {
+  text-decoration: underline;
+}
+
+.whatsappIcon {
+  width: 20px; /* Tamanho do ícone */
+  height: 20px;
+  vertical-align: middle;
+}
+
+.pastLink {
+  color: #128C7E; /* Uma cor um pouco mais escura para links em agendamentos passados, se desejar */
 }

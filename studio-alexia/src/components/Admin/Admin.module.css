@@ -42,6 +42,7 @@
 
 .header {
   display: flex;
+  flex-wrap: wrap; /* Adicionado para responsividade */
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
@@ -424,11 +425,51 @@
 }
 
 /* Appointments Styles */
-.filterGroup {
+.filterGroup, .searchGroup {
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.filterGroup label, .searchGroup label {
+  font-weight: 600;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.filterInput, .searchInput {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--gold-30);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background-color: var(--black-30);
+  color: var(--text-light);
+}
+
+.filterInput:focus, .searchInput:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--gold-20);
+}
+
+.searchInput {
+  min-width: 150px; /* Ajuste para que o input de busca não fique muito pequeno */
+}
+
+.btnClear {
+  background-color: var(--white-15);
+  color: var(--text-soft);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--white-20);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: opacity 0.3s;
+}
+
+.btnClear:hover {
+  opacity: 0.8;
 }
 
 .filterGroup label {
@@ -564,6 +605,23 @@
     gap: 1rem;
     align-items: stretch;
     padding: 1rem;
+  }
+
+  .filterGroup, .searchGroup {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filterInput, .searchInput {
+    flex-grow: 1;
+  }
+
+  .searchInput {
+    min-width: unset;
+  }
+
+  .btnClear {
+    flex-shrink: 0;
   }
 
   .header h1 {

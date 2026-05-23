@@ -14,6 +14,7 @@ const AppointmentsList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filterDate, setFilterDate] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [deleteModal, setDeleteModal] = useState<{
     isOpen: boolean;
     appointmentId: string | null;
@@ -103,15 +104,19 @@ const AppointmentsList = () => {
     return service ? service.title : 'Serviço não encontrado';
   };
 
-  const filteredAppointments = filterDate
-    ? appointments.filter((apt) => {
-        const aptDate = formatDate(new Date(apt.startTime));
-        const filterDateFormatted = formatDate(
-          new Date(filterDate + 'T00:00:00')
-        );
-        return aptDate === filterDateFormatted;
-      })
-    : appointments;
+  const filteredAppointments = appointments.filter((apt) => {
+    const matchesDate = filterDate
+      ? formatDate(new Date(apt.startTime)) ===
+        formatDate(new Date(filterDate + 'T00:00:00'))
+      : true;
+
+    const matchesSearch = searchTerm
+      ? apt.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        apt.clientContact.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+
+    return matchesDate && matchesSearch;
+  });
 
   const sortedAppointments = [...filteredAppointments].sort(
     (a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
@@ -157,6 +162,26 @@ const AppointmentsList = () => {
           {filterDate && (
             <button
               onClick={() => setFilterDate('')}
+              className={styles.btnClear}
+            >
+              Limpar
+            </button>
+          )}
+        </div>
+
+        <div className={styles.searchGroup}>
+          <label htmlFor="searchClient">Pesquisar cliente:</label>
+          <input
+            type="text"
+            id="searchClient"
+            placeholder="Nome ou contato"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm("")}
               className={styles.btnClear}
             >
               Limpar
@@ -251,9 +276,13 @@ const AppointmentsList = () => {
 
       {sortedAppointments.length === 0 && (
         <div className={styles.empty}>
-          {filterDate
-            ? 'Nenhum agendamento encontrado para esta data'
-            : 'Nenhum agendamento encontrado'}
+          {filterDate && searchTerm
+            ? 'Nenhum agendamento encontrado para esta data e cliente.'
+            : filterDate
+            ? 'Nenhum agendamento encontrado para esta data.'
+            : searchTerm
+            ? 'Nenhum agendamento encontrado para este cliente.'
+            : 'Nenhum agendamento encontrado.'}
         </div>
       )}
 

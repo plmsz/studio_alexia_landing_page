@@ -3,9 +3,9 @@ import { appointmentsApi, servicesApi } from '../../services/api';
 import type { Appointment } from '../../types/appointment';
 import type { Service } from '../../types/service';
 import { formatDateTime, formatDate, formatTime } from '../../utils/scheduleUtils';
-import { getWhatsAppLink } from '../../utils/formatUtils';
-import whatsappIcon from '../../assets/img/whatsapp-svgrepo-com.svg';
-import Modal from '../common/Modal';
+import { getWhatsAppLink } from '../../shared/lib/formatUtils';
+import whatsappIcon from '../../shared/assets/img/whatsapp-svgrepo-com.svg';
+import Modal from '../../shared/ui/Modal';
 import styles from './Admin.module.css';
 
 const AppointmentsList = () => {

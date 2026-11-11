@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Service } from '../../types/service';
-import { formatPrice, formatDuration } from '../../utils/formatUtils';
-import Modal from '../common/Modal';
+import { formatPrice, formatDuration } from '../../shared/lib/formatUtils';
+import Modal from '../../shared/ui/Modal';
 import styles from './Admin.module.css';
 
 interface ServicesListProps {

@@ -1,4 +1,4 @@
-import type { ScheduleDay, ContactInfo, LocationInfo } from '../types/service';
+import type { ScheduleDay, ContactInfo, LocationInfo } from '../../types/service';
 
 export const schedule: ScheduleDay[] = [
   { day: 'Segunda-feira:', hours: '09:00 - 12:00 e 14:00-18:00' },

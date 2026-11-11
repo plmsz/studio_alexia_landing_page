@@ -1,4 +1,4 @@
-import { locationInfo } from '../../data/services';
+import { locationInfo } from '../../data/index';
 import styles from './Location.module.css';
 
 const Location = () => {

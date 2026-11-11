@@ -10,11 +10,11 @@ import {
   getMaxDate,
   isWorkingDay,
 } from '../../utils/scheduleUtils';
-import Modal from '../common/Modal';
+import Modal from '../../shared/ui/Modal';
 import styles from './AppointmentForm.module.css';
-import calendarIcon from '../../assets/img/calendar.svg';
-import paintIcon from '../../assets/img/paint.svg';
-import timeIcon from '../../assets/img/time.svg';
+import calendarIcon from '../../shared/assets/img/calendar.svg';
+import paintIcon from '../../shared/assets/img/paint.svg';
+import timeIcon from '../../shared/assets/img/time.svg';
 
 const AppointmentForm = () => {
   const [services, setServices] = useState<Service[]>([]);

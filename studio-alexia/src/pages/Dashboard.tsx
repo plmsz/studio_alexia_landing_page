@@ -1,4 +1,4 @@
-import googleIconImg from '../assets/img/google-icon.svg';
+import googleIconImg from '../shared/assets/img/google-icon.svg';
 import { useState, useEffect } from 'react';
 import { servicesApi } from '../services/api';
 import type { Service } from '../types/service';

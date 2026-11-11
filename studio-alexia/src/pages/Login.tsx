@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import styles from './Login.module.css';
-import googleIcon from '../assets/img/google-icon.svg';
+import googleIcon from '../shared/assets/img/google-icon.svg';
 
 const Login = () => {
   const navigate = useNavigate();

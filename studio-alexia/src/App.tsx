@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useScrollToHash } from './hooks/useScrollToHash';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import { useScrollToHash } from './shared/hooks/useScrollToHash';
+import Header from './shared/ui/Header/Header';
+import Footer from './shared/ui/Footer/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
 import Dashboard from './pages/Dashboard';

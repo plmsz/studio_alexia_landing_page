@@ -1,6 +1,6 @@
 import type { Service } from '../../types/service';
-import { formatPrice, formatDuration } from '../../utils/formatUtils';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+import { formatPrice, formatDuration } from '../../shared/lib/formatUtils';
+import { useScrollAnimation } from '../../shared/hooks/useScrollAnimation';
 import styles from './Services.module.css';
 
 interface ServiceCardProps extends Service {

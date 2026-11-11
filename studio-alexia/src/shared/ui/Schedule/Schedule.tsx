@@ -1,4 +1,4 @@
-import { schedule } from '../../data/services';
+import { schedule } from '../../data/index';
 import styles from './Schedule.module.css';
 
 const Schedule = () => {

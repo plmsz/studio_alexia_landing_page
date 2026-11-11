@@ -187,10 +187,9 @@ ncu --interactive --format group
 ```
 
 ## 🔄 Próximas Implementações
-    - [ ] Escrever regras de negócio existentes 11
     - [ ] Estruturação do React em módulos isolados por domínio de negócio. 12
-    - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 13
-    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 14
+    - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 12
+    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 12
     - [ ] Adicionar mascara de telefone
     - [ ] Melhorar loading - apenas no componente e não a tela inteira
 

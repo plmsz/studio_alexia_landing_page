@@ -232,19 +232,7 @@ ConfirmationModal exibe botões datebook (Google/Apple/Outlook/.ics)
 
 ---
 
-## 8. Correção de Vulnerabilidades de Segurança
-
-Antes de colocar as novas funcionalidades em produção, deve-se auditar e corrigir vulnerabilidades nas dependências e no código:
-
-### 8.1 Auditoria de Dependências
-
-```bash
-# Dentro de /home/paloma/Documentos/studio_alexia_landing_page/studio-alexia
-npm audit
-npm audit fix
-```
-
-### 8.2 Itens de Segurança a Validar
+## 8. Itens de Segurança a Validar
 
 - [ ] **Variáveis de ambiente:** Confirmar que `.env` não está versionado no Git (verificar `.gitignore`).
 - [ ] **Chaves Firebase:** As credenciais do Firebase devem estar apenas em `.env` e nunca hardcadas no código-fonte (remover `src/components/Services/firebase.ts` com chaves expostas).
@@ -254,37 +242,16 @@ npm audit fix
 - [ ] **JSON-Server exposto:** Verificar se o JSON-Server no Render não está acessível sem autenticação para operações de escrita sensíveis.
 - [ ] **Atualização de pacotes:** Atualizar `datebook`, `react-day-picker` e `dayjs` para versões mais recentes estáveis após instalação.
 
-### 8.3 Comando de Verificação Final
-
-```bash
-npm audit --production
-npm run build
-npm run lint
-```
 
 ## 9. Documentação — README.md (Resumo do Conteúdo)
 
-O `README.md` deverá conter as seguintes seções:
+Atualize o `README.md` 
 
-- Badge & Nome do Projeto: Plataforma Web – Studio Alexia Menezes
-- Visão Geral e Objetivos (ODS 8 e 10)
-- Tecnologias Utilizadas (React 19, TS, Vite, CSS Modules, Firebase, JSON-Server, datebook, react-day-picker, dayjs)
-- Arquitetura de Pastas e Componentes
-- Novas Funcionalidades (Visão Admin e Cliente)
-- Guia de Instalação e Execução Local
-- Variáveis de Ambiente (`.env.example`)
-- Deploy e Links Públicos (Vercel + Render)
-- Modelos de Dados (Service, Appointment, BusinessHours, BlockedDate)
-- Rotas da Aplicação
-- Como Contribuir
 
 ---
 
 ## 10. Próximos Passos
-
-1. Validar este plano com o produto.
-2. Executar as alterações na ordem: dependências → db.json → types → api.ts → utils → componentes → páginas → documentação.
-3. Rodar `npm run build` e `npm run lint` para validação.
+- Rodar `npm run build` e `npm run lint` para validação.
 
 
 ---

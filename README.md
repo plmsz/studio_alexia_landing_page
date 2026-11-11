@@ -133,15 +133,7 @@ VITE_FIREBASE_MEASUREMENT_ID=seu_measurement_id
 VITE_ADMIN_EMAILS=admin@example.com,outro.admin@example.com
 ```
 
-### 4. Execute o JSON Server (em um terminal)
-
-```bash
-npm run json-server
-```
-
-O servidor mock estará disponível em `http://localhost:3001`
-
-### 5. Execute a aplicação (em outro terminal)
+### 4. Execute a aplicação 
 
 ```bash
 npm run dev
@@ -156,7 +148,6 @@ npm run dev          # Inicia o servidor de desenvolvimento
 npm run build        # Gera build de produção
 npm run preview      # Visualiza o build de produção
 npm run lint         # Executa o linter
-npm run json-server  # Inicia o JSON Server na porta 3001
 ```
 
 ## 🔐 Autenticação e Autorização
@@ -192,20 +183,34 @@ firebase deploy
 ```
 
 ## 🔄 Próximas Implementações
+    - [ ] Adicionar mascara de telefone
+    - [ ] Executar e rodar as is 11
+    - [ ] Escrever regras de negócio existentes 11
+    - [ ] Estruturação do React em módulos isolados por domínio de negócio. 12
+    - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 13
+    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 14
 
+    - [ ] Login Social do cliente com Google via Firebase 15
+    - [ ] Interface pública para clientes selecionarem procedimentos e marcar e cancelar horários de forma autônoma. 
+    - [ ] Coleta de notas por estrelas e feedbacks pós-atendimento para exibição pública na página. - 24
+    - [ ] Testes Unitários e de UI: Cobertura de utilizando Vitest, React Testing Library e MSW. - 25
+
+- [ ] Pipeline automatizado no GitHub Actions com análises do SonarQube, Biome e deploy contínuo.
+- [ ] API em C# .NET Core ou Node.js com camadas desacopladas e persistência em PostgreSQL.
+- [ ] Dashboard de Métricas e Faturamento: Painel com gráficos de receitas, taxa de absenteísmo, ticket médio e serviços mais procurados.
+- [ ] Automação de cenários completos de agendamento e administração com Playwright em telas mobile e desktop.
+- [ ] Renderização prévia no servidor para performance máxima de carregamento e indexação no Google.
+- [ ] Publicação de artigos otimizados via Headless CMS (Sanity/Strapi) para atração de tráfego orgânico.
+- [ ] Exibição de fotos antes/depois com upload e otimização em nuvem via Cloudinary.
 - [ ] SEO otimizado
 - [ ] Google Analytics integrado
-- [ ] Edição dos horários de disponibilidade
-- [ ] Exibição dos agendamentos para clientes
-- [ ] Sistema de notificações por e-mail ou whatsapp
-- [ ] Integração com calendário Google
-- [ ] Sistema de avaliações de clientes
-- [ ] Galeria de trabalhos realizados
-- [ ] Sistema de pagamento online
-- [ ] Blog para marketing de conteúdo
-- [ ] Funcionalidades de CRM para gestão do relacionamento com os clientes, plataforma poderá explorar a automatização de envio dessas mensagens via robôs de WhatsApp (API oficial)
-- [ ] Integração de um painel de métricas (Dashboards) para visualização do faturamento e dos serviços mais procurados no mês.
-
+- [ ] Notificações instantâneas no painel admin via SignalR/WebSockets para cancelamentos e alterações.
+- [ ] Sincronização automática dos agendamentos com a conta Google da proprietária.
+- [ ] Disparos automáticos de pós-venda, aniversários e lembretes de retorno pós-30 dias.
+- [ ] Observabilidade e Telemetria: Monitoramento e captura de exceções em tempo real no cliente e servidor usando Sentry/Datadog.
+- [ ] Cobrança de sinal via Pix dinâmico ou cartão com aprovação imediata via webhooks para novos clientes em procedimentos demorados.
+ -[ ] Envio de confirmações e lembretes pré-atendimento (24h e 2h antes) via API Oficial da Meta.
+- [ ] Autenticação por OTP via WhatsApp / SMS ou Magic Link Assinado (Tokens JWT) ou OAuth2 / OpenID Connect Nativo
 ---
 
 ## 👩‍💻 Desenvolvimento

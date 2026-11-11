@@ -181,14 +181,20 @@ Para deploy completo com Firebase:
 npm run build
 firebase deploy
 ```
+### 
+```bash
+ncu --interactive --format group
+```
 
 ## 🔄 Próximas Implementações
-    - [ ] Adicionar mascara de telefone
+
     - [ ] Executar e rodar as is 11
     - [ ] Escrever regras de negócio existentes 11
     - [ ] Estruturação do React em módulos isolados por domínio de negócio. 12
     - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 13
     - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 14
+    - [ ] Adicionar mascara de telefone
+    - [ ] Melhorar loading - apenas no componente e não a tela inteira
 
     - [ ] Login Social do cliente com Google via Firebase 15
     - [ ] Interface pública para clientes selecionarem procedimentos e marcar e cancelar horários de forma autônoma. 
@@ -213,7 +219,51 @@ firebase deploy
 - [ ] Autenticação por OTP via WhatsApp / SMS ou Magic Link Assinado (Tokens JWT) ou OAuth2 / OpenID Connect Nativo
 ---
 
-## 👩‍💻 Desenvolvimento
+## 🔍 Como Revisar o ESLint
+
+Para revisar a qualidade do código com o ESLint, execute:
+
+```bash
+npm run lint
+```
+
+### Configuração atual
+
+O `eslint.config.js` está configurado com as regras do TypeScript ESLint e do ESLint, incluindo:
+
+- `react-hooks/set-state-in-effect`: **desabilitada temporariamente**
+- `react-hooks/immutability`: **desabilitada temporariamente**
+
+### Como revisar
+
+1. **Rodar o linter**
+   ```bash
+   npm run lint
+   ```
+
+2. **Verificar erros críticos**
+   - Erros de parse
+   - Regras de `react` e `react-hooks`
+   - Regras de TypeScript
+
+3. **Corrigir automaticamente quando possível**
+   ```bash
+   npx eslint . --fix
+   ```
+
+### Próximos passos
+
+Em breve, as regras `react-hooks/set-state-in-effect` e `react-hooks/immutability` serão **reativadas** e o código será refatorado para evitar `setState()` diretamente dentro de `useEffect`. Recomendamos:
+
+- Revisar cada erro reportado no `npm run lint`
+- Migrar chamadas de `setState` para fora dos `useEffect`
+- Revisar a ordem de dependências dos hooks
+- Adicionar testes unitários uma vez que as regras de qualidade estejam ativas
+
+> **Nota:** Essas regras foram desativadas temporariamente para facilitar a integração das bibliotecas em sua versão `latest`, sem quebrar o fluxo de desenvolvimento.
+
+
+
 
 > Projeto desenvolvido por **Paloma Souza** como parte do Projeto de Extensão III em Ciência da Computação.
 

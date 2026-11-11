@@ -1,4 +1,4 @@
-import { contactInfo } from '../../data/index';
+import { contactInfo } from '../../data';
 import styles from './Contact.module.css';
 import instagramIcon from '../../assets/img/instagram-svgrepo-com.svg';
 import phoneIcon from '../../assets/img/phone-svgrepo.svg';

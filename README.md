@@ -187,8 +187,6 @@ ncu --interactive --format group
 ```
 
 ## 🔄 Próximas Implementações
-
-    - [ ] Executar e rodar as is 11
     - [ ] Escrever regras de negócio existentes 11
     - [ ] Estruturação do React em módulos isolados por domínio de negócio. 12
     - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 13

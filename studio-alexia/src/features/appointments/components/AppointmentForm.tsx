@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { servicesApi, appointmentsApi } from '../../services/api';
-import type { Service } from '../../types/service';
-import type { Appointment } from '../../types/appointment';
+import { servicesApi } from '../../services/api/servicesApi';
+import { appointmentsApi } from '../api/appointmentsApi';
+import type { Service } from '../../services/types';
+import type { Appointment } from '../types';
 import {
   generateTimeSlots,
   formatTime,
@@ -9,12 +10,12 @@ import {
   getMinDate,
   getMaxDate,
   isWorkingDay,
-} from '../../utils/scheduleUtils';
-import Modal from '../../shared/ui/Modal';
+} from '../utils/scheduleUtils';
+import Modal from '../../../shared/ui/Modal';
 import styles from './AppointmentForm.module.css';
-import calendarIcon from '../../shared/assets/img/calendar.svg';
-import paintIcon from '../../shared/assets/img/paint.svg';
-import timeIcon from '../../shared/assets/img/time.svg';
+import calendarIcon from '../../../shared/assets/img/calendar.svg';
+import paintIcon from '../../../shared/assets/img/paint.svg';
+import timeIcon from '../../../shared/assets/img/time.svg';
 
 const AppointmentForm = () => {
   const [services, setServices] = useState<Service[]>([]);

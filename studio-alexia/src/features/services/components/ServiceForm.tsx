@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import type { Service } from '../../types/service';
-import { processImageFile } from '../../shared/lib/imageUtils';
+import type { Service } from '../types';
+import { processImageFile } from '../../../shared/lib/imageUtils';
 import styles from './Admin.module.css';
 
 interface ServiceFormProps {

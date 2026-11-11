@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { appointmentsApi, servicesApi } from '../../services/api';
-import type { Appointment } from '../../types/appointment';
-import type { Service } from '../../types/service';
-import { formatDateTime, formatDate, formatTime } from '../../utils/scheduleUtils';
-import { getWhatsAppLink } from '../../shared/lib/formatUtils';
-import whatsappIcon from '../../shared/assets/img/whatsapp-svgrepo-com.svg';
-import Modal from '../../shared/ui/Modal';
+import { appointmentsApi } from '../api/appointmentsApi';
+import { servicesApi } from '../../services/api/servicesApi';
+import type { Appointment } from '../types';
+import type { Service } from '../../services/types';
+import { formatDateTime, formatDate, formatTime } from '../utils/scheduleUtils';
+import { getWhatsAppLink } from '../../../shared/lib/formatUtils';
+import whatsappIcon from '../../../shared/assets/img/whatsapp-svgrepo-com.svg';
+import Modal from '../../../shared/ui/Modal';
 import styles from './Admin.module.css';
 
 const AppointmentsList = () => {

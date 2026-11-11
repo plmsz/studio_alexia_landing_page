@@ -1,4 +1,4 @@
-import Services from '../components/Services/Services';
+import Services from '../features/services/components/Services';
 
 const ServicesPage = () => {
   return <Services showAll />;

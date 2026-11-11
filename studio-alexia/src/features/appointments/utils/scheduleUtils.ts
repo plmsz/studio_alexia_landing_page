@@ -1,4 +1,4 @@
-import type { Appointment } from '../types/appointment';
+import type { Appointment } from '../types';
 
 export interface TimeSlot {
   time: Date;

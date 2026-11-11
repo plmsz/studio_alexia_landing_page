@@ -1,5 +1,5 @@
 import { Hero } from '../shared/ui/Hero';
-import Services from '../components/Services/Services';
+import Services from '../features/services/components/Services';
 import { Schedule } from '../shared/ui/Schedule';
 import { Contact } from '../shared/ui/Contact';
 import { Location } from '../shared/ui/Location';

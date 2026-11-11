@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { servicesApi } from '../../services/api';
-import type { Service } from '../../types/service';
+import { servicesApi } from '../api/servicesApi';
+import type { Service } from '../types';
 import ServiceCard from './ServiceCard';
 import styles from './Services.module.css';
 

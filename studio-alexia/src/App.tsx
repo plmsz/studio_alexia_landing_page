@@ -4,12 +4,12 @@ import { Header } from './shared/ui/Header';
 import { Footer } from './shared/ui/Footer';
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Unauthorized from './pages/Unauthorized';
-import AppointmentForm from './components/Appointment/AppointmentForm';
-import { AuthContextProvider } from './contexts/AuthContext';
-import { ProtectedRoute } from './components/ProtectedRoute';
+import Dashboard from './features/auth/pages/Dashboard';
+import Login from './features/auth/pages/Login';
+import Unauthorized from './features/auth/pages/Unauthorized';
+import AppointmentForm from './features/appointments/components/AppointmentForm';
+import { AuthContextProvider } from './features/auth/context/AuthContext';
+import { ProtectedRoute } from './features/auth/components/ProtectedRoute';
 
 function AppContent() {
   useScrollToHash();

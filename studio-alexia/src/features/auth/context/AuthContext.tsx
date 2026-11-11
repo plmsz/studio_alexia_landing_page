@@ -3,7 +3,7 @@ import {
   auth,
   GoogleAuthProvider,
   signInWithPopup,
-} from '../services/firebase';
+} from '../firebase';
 
 type User = {
   id: string;

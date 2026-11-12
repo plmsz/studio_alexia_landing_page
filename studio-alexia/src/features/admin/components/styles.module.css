@@ -245,6 +245,12 @@
   overflow-y: auto;
   box-shadow: 0 8px 16px var(--black-50);
   border: 1px solid var(--gold-20);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.formContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .formContainer h2 {

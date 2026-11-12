@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import type { Service } from '../types';
+import type { Service } from '../../services/types';
 import { processImageFile } from '../../../shared/lib/imageUtils';
 import styles from './styles.module.css';
 

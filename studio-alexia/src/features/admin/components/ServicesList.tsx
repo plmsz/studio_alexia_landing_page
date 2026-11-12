@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Service } from '../types';
+import type { Service } from '../../services/types';
 import { formatPrice, formatDuration } from '../../../shared/lib/formatUtils';
 import Modal from '../../../shared/ui/Modal';
 import styles from './styles.module.css';

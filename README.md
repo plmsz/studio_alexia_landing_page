@@ -187,12 +187,10 @@ ncu --interactive --format group
 ```
 
 ## 🔄 Próximas Implementações
-    - [ ] Estruturação do React em módulos isolados por domínio de negócio. 12
     - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 12
     - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 12
-    - [ ] Adicionar mascara de telefone
+    - [ ] Adicionar mascara e melhorar validação de telefone
     - [ ] Melhorar loading - apenas no componente e não a tela inteira
-
     - [ ] Login Social do cliente com Google via Firebase 15
     - [ ] Interface pública para clientes selecionarem procedimentos e marcar e cancelar horários de forma autônoma. 
     - [ ] Coleta de notas por estrelas e feedbacks pós-atendimento para exibição pública na página. - 24

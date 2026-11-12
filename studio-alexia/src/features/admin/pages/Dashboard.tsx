@@ -1,12 +1,12 @@
 import googleIconImg from '../../../shared/assets/img/google-icon.svg';
 import { useState, useEffect } from 'react';
+import styles from '../components/styles.module.css';
+import { useAuth } from '../../auth/hooks/useAuth';
+import ServicesList from '../components/ServicesList';
+import ServiceForm from '../components/ServiceForm';
+import AppointmentsList from '../components/AppointmentsList';
 import { servicesApi } from '../../services/api/servicesApi';
 import type { Service } from '../../services/types';
-import ServicesList from '../../services/components/ServicesList';
-import ServiceForm from '../../services/components/ServiceForm';
-import AppointmentsList from '../../appointments/components/AppointmentsList';
-import styles from '../../services/components/styles.module.css';
-import { useAuth } from '../hooks/useAuth';
 
 type TabType = 'services' | 'appointments';
 

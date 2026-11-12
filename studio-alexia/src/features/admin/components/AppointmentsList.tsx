@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { appointmentsApi } from '../api/appointmentsApi';
-import { servicesApi } from '../../services/api/servicesApi';
-import type { Appointment } from '../types';
-import type { Service } from '../../services/types';
-import { formatDateTime, formatDate, formatTime } from '../utils/scheduleUtils';
+import { appointmentsApi } from '../../appointments/api/appointmentsApi';
+import type { Appointment } from '../../appointments/types';
+import { formatDateTime, formatDate, formatTime } from '../../appointments/utils/scheduleUtils';
 import { getWhatsAppLink } from '../../../shared/lib/formatUtils';
 import whatsappIcon from '../../../shared/assets/img/whatsapp-svgrepo-com.svg';
 import Modal from '../../../shared/ui/Modal';
 import styles from './styles.module.css';
+import type { Service } from '../../services/types';
+import { servicesApi } from '../../services/api/servicesApi';
 
 const AppointmentsList = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);

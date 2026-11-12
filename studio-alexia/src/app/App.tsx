@@ -4,7 +4,7 @@ import { Header } from '../shared/ui/Header';
 import { Footer } from '../shared/ui/Footer';
 import Home from '../pages/Home';
 import ServicesPage from '../pages/ServicesPage';
-import Dashboard from '../features/auth/pages/Dashboard';
+import Dashboard from '../features/admin/pages/Dashboard';
 import Login from '../features/auth/pages/Login';
 import Unauthorized from '../features/auth/pages/Unauthorized';
 import AppointmentForm from '../features/appointments/components/AppointmentForm';

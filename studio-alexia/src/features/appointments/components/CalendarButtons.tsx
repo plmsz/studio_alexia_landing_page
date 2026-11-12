@@ -1,13 +1,30 @@
 import { ICalendar, GoogleCalendar, OutlookCalendar } from 'datebook';
+import { SiGoogle, SiApple } from 'react-icons/si';
+import { LuMail, LuDownload } from 'react-icons/lu';
 import { locationInfo, contactInfo } from '../../../shared/data/index';
+import { downloadIcs } from '../../../shared/utils/downloadFile';
 import styles from './CalendarButtons.module.css';
 
 interface CalendarButtonsProps {
-  date: string;       // YYYY-MM-DD
-  time: string;       // HH:mm
+  date: string;     // YYYY-MM-DD
+  time: string;     // HH:mm
   serviceName: string;
-  duration: number;   // em minutos
+  duration: number; // em minutos
 }
+
+/**
+ * Formata um objeto Date como ISO local sem sufixo UTC (YYYY-MM-DDTHH:mm:ss).
+ */
+const formatLocalIso = (d: Date): string => {
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const year = d.getFullYear();
+  const month = pad(d.getMonth() + 1);
+  const day = pad(d.getDate());
+  const hours = pad(d.getHours());
+  const minutes = pad(d.getMinutes());
+  const seconds = pad(d.getSeconds());
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+};
 
 const CalendarButtons = ({
   date,
@@ -15,6 +32,7 @@ const CalendarButtons = ({
   serviceName,
   duration,
 }: CalendarButtonsProps) => {
+  // Cria a data no fuso local do navegador do cliente
   const start = new Date(`${date}T${time}:00`);
   const end = new Date(start.getTime() + duration * 60000);
 
@@ -29,20 +47,21 @@ const CalendarButtons = ({
     end,
   };
 
+  // Google Calendar funciona perfeitamente com UTC (Z)
   const googleUrl = new GoogleCalendar(eventConfig).render();
-  const outlookUrl = new OutlookCalendar(eventConfig).render();
 
-  const downloadIcs = () => {
+  // O Outlook Web (deeplink) frequentemente interpreta o formato com 'Z' somando
+  // Enviando o horário local explícito sem 'Z' (floating time local),
+  const rawOutlookUrl = new OutlookCalendar(eventConfig).render();
+  const startLocalStr = formatLocalIso(start);
+  const endLocalStr = formatLocalIso(end);
+  const outlookUrl = rawOutlookUrl
+    .replace(/startdt=[^&]+/, `startdt=${encodeURIComponent(startLocalStr)}`)
+    .replace(/enddt=[^&]+/, `enddt=${encodeURIComponent(endLocalStr)}`);
+
+  const handleIcsDownload = () => {
     const icsContent = new ICalendar(eventConfig).render();
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'agendamento-studio-alexia.ics';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    downloadIcs(icsContent, 'agendamento-studio-alexia.ics');
   };
 
   return (
@@ -55,15 +74,17 @@ const CalendarButtons = ({
           rel="noopener noreferrer"
           className={`${styles.calendarBtn} ${styles.google}`}
         >
-          📅 Google Agenda
+          <SiGoogle size={15} aria-hidden />
+          Google Agenda
         </a>
 
         <button
           type="button"
-          onClick={downloadIcs}
+          onClick={handleIcsDownload}
           className={`${styles.calendarBtn} ${styles.apple}`}
         >
-          🍏 Apple Calendar
+          <SiApple size={15} aria-hidden />
+          Apple Calendar
         </button>
 
         <a
@@ -72,15 +93,17 @@ const CalendarButtons = ({
           rel="noopener noreferrer"
           className={`${styles.calendarBtn} ${styles.outlook}`}
         >
-          ✉️ Outlook
+          <LuMail size={15} aria-hidden />
+          Outlook
         </a>
 
         <button
           type="button"
-          onClick={downloadIcs}
+          onClick={handleIcsDownload}
           className={`${styles.calendarBtn} ${styles.ics}`}
         >
-          💾 Baixar .ics
+          <LuDownload size={15} aria-hidden />
+          Baixar .ics
         </button>
       </div>
     </div>

@@ -73,13 +73,25 @@ Campos:
 
 ---
 
-## 3. Novos Tipos TypeScript (`src/types/`)
+## 3. Novos Tipos TypeScript
 
-**Novo arquivo:** `/home/paloma/Documentos/studio_alexia_landing_page/studio-alexia/src/types/businessHours.ts`
+**Novos arquivos:**
+- `src/features/services/types.ts` - Tipos do domínio Service
+- `src/shared/types.ts` - Tipos compartilhados (ScheduleDay, ContactInfo, LocationInfo)
 
 ```typescript
-export interface BusinessHours {
+// src/features/services/types.ts- Tipos do domínio Service
+export interface Service {
   id: number;
+  name: string;
+  description: string;
+  duration: number; // em minutos
+  price: number;
+  isActive: boolean;
+}
+
+// src/shared/types.ts - Tipos compartilhados
+export interface ScheduleDay {
   dayOfWeek: number; // 0 = Domingo, ..., 6 = Sábado
   open: string;      // HH:mm
   close: string;     // HH:mm
@@ -87,6 +99,21 @@ export interface BusinessHours {
   breakEnd: string | null;   // HH:mm ou null
   isWorking: boolean;
 }
+
+export interface ContactInfo {
+  phone: string;
+  email: string;
+  whatsapp: string;
+}
+
+export interface LocationInfo {
+  address: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  zipCode: string;
+}
+```
 
 export interface BlockedDate {
   id: number;
@@ -191,7 +218,7 @@ export const generateTimeSlots = (
 | `src/pages/Dashboard.tsx` | Adicionar nova aba "Agenda" no painel admin contendo `BusinessHoursManager` e `DateBlocker`. |
 | `src/utils/scheduleUtils.ts` | Refatorar `generateTimeSlots` e adicionar funções auxiliares. |
 | `src/services/api.ts` | Adicionar `businessHoursApi` e `blockedDatesApi`. |
-| `src/types/businessHours.ts` | Novo arquivo com interfaces `BusinessHours` e `BlockedDate`. |
+| `src/features/services/types.ts` | Novo arquivo com interfaces `BusinessHours` e `BlockedDate`. |
 
 ### Fluxo de dados atualizado (Agendamento)
 

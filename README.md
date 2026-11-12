@@ -42,33 +42,91 @@ Desenvolver uma aplicação web moderna e responsiva que:
 
 ## 📁 Estrutura do Projeto
 
-```
-PEX3/
-├── studio-alexia/
-│   ├── src/
-│   │   ├── components/         # Componentes reutilizáveis
-│   │   │   ├── Admin/          # Painel administrativo
-│   │   │   ├── Appointment/    # Sistema de agendamento
-│   │   │   ├── common/         # Componentes comuns (Modal, etc)
-│   │   │   ├── Contact/        # Seção de contato
-│   │   │   ├── Footer/         # Rodapé
-│   │   │   ├── Header/         # Cabeçalho e navegação
-│   │   │   ├── Hero/           # Seção hero da página inicial
-│   │   │   ├── Location/       # Localização e mapa
-│   │   │   ├── Schedule/       # Horários de atendimento
-│   │   │   └── Services/       # Listagem de serviços
-│   │   ├── contexts/           # Contextos React (Auth)
-│   │   ├── hooks/              # Custom hooks
-│   │   ├── pages/              # Páginas da aplicação
-│   │   ├── services/           # Serviços e integração com APIs
-│   │   ├── styles/             # Estilos globais
-│   │   ├── types/              # Definições de tipos TypeScript
-│   │   └── utils/              # Funções utilitárias
-│   ├── public/                 # Arquivos públicos
-│   ├── db.json                 # Banco de dados mock (JSON Server)
-│   ├── .env.example            # Exemplo de variáveis de ambiente
-│   └── package.json            # Dependências do projeto
-└── README.md                   # Este arquivo
+```json
+studio-alexia/
+├── src/
+│   ├── app/                            # camada shell: providers + rota + layout
+│   │   ├── providers/
+│   │   │   └── AuthProvider.tsx        # AuthContextProvider (wrapper da sessão)
+│   │   └── App.tsx                     # Router + Providers + Rotas finas (sem lógica de domínio)
+│   ├── features/
+│   │   ├── services/                   # Serviços
+│   │   │   ├── components/
+│   │   │   │   ├── Services.tsx
+│   │   │   │   ├── Services.module.css
+│   │   │   │   ├── ServiceCard.tsx
+│   │   │   │   ├── ServiceCard.module.css
+│   │   │   │   ├── ServicesList.tsx        # admin (privado)
+│   │   │   │   ├── ServiceForm.tsx         # admin (privado)
+│   │   │   │   └── Admin.module.css        # admin (privado)
+│   │   │   ├── api/
+│   │   │   │   └── servicesApi.ts
+│   │   │   ├── types.ts                  # Service, ScheduleDay, ContactInfo, LocationInfo
+│   │   │   ├── data.ts                   # schedule, contactInfo, locationInfo
+│   │   │   ├── utils/
+│   │   │   │   └── formatService.ts
+│   │   │   └── index.ts                  # API pública do domínio
+│   ├── appointments/                   # Agendamentos
+│   │   ├── components/
+│   │   │   ├── AppointmentForm.tsx
+│   │   │   ├── AppointmentForm.module.css
+│   │   │   ├── ConfirmationModal.tsx
+│   │   │   ├── ConfirmationModal.module.css
+│   │   │   ├── AppointmentsList.tsx      # admin (privado)
+│   │   │   └── Admin.module.css
+│   │   ├── api/
+│   │   │   └── appointmentsApi.ts
+│   │   ├── types.ts                    # Appointment
+│   │   ├── utils/
+│   │   │   └── scheduleUtils.ts
+│   │   └── index.ts                    # API pública do domínio
+│   └── auth/                           # Autenticação / Área Administrativa
+│       ├── components/
+│       │   └── ProtectedRoute.tsx
+│       ├── context/
+│       │   └── AuthContext.tsx
+│       ├── hooks/
+│       │   └── useAuth.ts
+│       ├── firebase.ts
+│       ├── pages/
+│       │   ├── Login.tsx
+│       │   ├── Dashboard.tsx
+│       │   └── Unauthorized.tsx
+│       └── index.ts                    # API pública do domínio
+│   ├── shared/                         # infra sem dono
+│   │   ├── ui/                         # primitivas
+│   │   │   ├── Modal.tsx
+│   │   │   ├── Modal.module.css
+│   │   │   ├── Header.tsx
+│   │   │   ├── Header.module.css
+│   │   │   ├── Footer.tsx
+│   │   │   ├── Footer.module.css
+│   │   │   ├── Hero.tsx
+│   │   │   ├── Hero.module.css
+│   │   │   ├── Location.tsx
+│   │   │   ├── Location.module.css
+│   │   │   ├── Contact.tsx
+│   │   │   ├── Contact.module.css
+│   │   │   ├── Schedule.tsx
+│   │   │   ├── Schedule.module.css
+│   │   │   └── index.ts
+│   │   ├── lib/                        # utilitários genéricos
+│   │   │   ├── imageUtils.ts
+│   │   │   ├── formatUtils.ts
+│   │   │   └── index.ts
+│   │   ├── hooks/                      # hooks genéricos
+│   │   │   ├── useScrollAnimation.ts
+│   │   │   ├── useScrollToHash.ts
+│   │   │   └── index.ts
+│   │   ├── data/                       # dados estáticos de site
+│   │   │   └── index.ts
+│   │   ├── assets/
+│   │   │   └── img/
+│   │   ├── styles/
+│   │   │   └── global.css
+│   │   └── index.ts                    # barrel de shared
+│   ├── main.tsx                        # entrada (mantém no src/)
+│   └── types/                          # (remover/centralizar; ver regra de divisão)
 ```
 
 ## 🛠️ Funcionalidades
@@ -181,7 +239,7 @@ Para deploy completo com Firebase:
 npm run build
 firebase deploy
 ```
-### 
+### Atulizar pacotes
 ```bash
 ncu --interactive --format group
 ```
@@ -190,7 +248,7 @@ ncu --interactive --format group
     - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 12
     - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 12
     - [ ] Adicionar mascara e melhorar validação de telefone
-    - [ ] Melhorar loading - apenas no componente e não a tela inteira
+    - [ ] Melhorar loading com animação simples - apenas no componente e não a tela inteira
     - [ ] Login Social do cliente com Google via Firebase 15
     - [ ] Interface pública para clientes selecionarem procedimentos e marcar e cancelar horários de forma autônoma. 
     - [ ] Coleta de notas por estrelas e feedbacks pós-atendimento para exibição pública na página. - 24

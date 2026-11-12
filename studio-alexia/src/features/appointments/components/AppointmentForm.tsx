@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { servicesApi } from '../../services/api/servicesApi';
 import { appointmentsApi } from '../api/appointmentsApi';
+import { businessHoursApi, blockedDatesApi } from '../api/scheduleApi';
 import type { Service } from '../../services/types';
 import type { Appointment } from '../types';
+import type { BusinessHours, BlockedDate } from '../../../shared/types';
 import {
   generateTimeSlots,
   formatTime,
@@ -24,6 +26,8 @@ const AppointmentForm = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState<Date | null>(null);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [businessHours, setBusinessHours] = useState<BusinessHours[]>([]);
+  const [blockedDates, setBlockedDates] = useState<BlockedDate[]>([]);
   const [timeSlots, setTimeSlots] = useState<
     { time: Date; available: boolean }[]
   >([]);
@@ -56,7 +60,21 @@ const AppointmentForm = () => {
 
   useEffect(() => {
     loadServices();
+    loadScheduleConfig();
   }, []);
+
+  const loadScheduleConfig = async () => {
+    try {
+      const [hours, blocked] = await Promise.all([
+        businessHoursApi.getAll(),
+        blockedDatesApi.getAll(),
+      ]);
+      setBusinessHours(hours);
+      setBlockedDates(blocked);
+    } catch (err) {
+      console.error('Erro ao buscar configurações de agenda:', err);
+    }
+  };
 
   useEffect(() => {
     if (selectedDate) {
@@ -70,15 +88,23 @@ const AppointmentForm = () => {
       const slots = generateTimeSlots(
         date,
         appointments,
-        selectedService.duration
+        selectedService.duration,
+        businessHours,
+        blockedDates
       );
       setTimeSlots(slots);
     } else if (selectedDate && appointments) {
       const date = new Date(selectedDate + 'T00:00:00');
-      const slots = generateTimeSlots(date, appointments);
+      const slots = generateTimeSlots(
+        date,
+        appointments,
+        undefined,
+        businessHours,
+        blockedDates
+      );
       setTimeSlots(slots);
     }
-  }, [selectedDate, appointments, selectedService]);
+  }, [selectedDate, appointments, selectedService, businessHours, blockedDates]);
 
   const loadServices = async () => {
     try {
@@ -110,10 +136,10 @@ const AppointmentForm = () => {
 
     if (date) {
       const selectedDateObj = new Date(date + 'T00:00:00');
-      if (!isWorkingDay(selectedDateObj)) {
+      if (!isWorkingDay(selectedDateObj, businessHours, blockedDates)) {
         setErrorModal({
           isOpen: true,
-          message: 'O dia selecionado não é um dia de trabalho',
+          message: 'O dia selecionado não está disponível para agendamento',
         });
       }
     }

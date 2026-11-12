@@ -1,43 +1,65 @@
+import dayjs from 'dayjs';
 import type { Appointment } from '../types';
+import type { BusinessHours, BlockedDate } from '../../../shared/types';
 
 export interface TimeSlot {
   time: Date;
   available: boolean;
 }
 
-export interface WorkingHours {
-  dayOfWeek: number;
-  periods: { start: string; end: string }[];
-}
-
-const workingHours: WorkingHours[] = [
-  { dayOfWeek: 1, periods: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 2, periods: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 3, periods: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 4, periods: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 5, periods: [{ start: '09:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 6, periods: [{ start: '10:00', end: '12:00' }, { start: '14:00', end: '18:00' }] },
-  { dayOfWeek: 0, periods: [{ start: '09:00', end: '12:00' }] },
+const defaultWorkingHours: BusinessHours[] = [
+  { id: 1, dayOfWeek: 1, open: '09:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 2, dayOfWeek: 2, open: '09:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 3, dayOfWeek: 3, open: '09:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 4, dayOfWeek: 4, open: '09:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 5, dayOfWeek: 5, open: '09:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 6, dayOfWeek: 6, open: '10:00', close: '18:00', breakStart: '12:00', breakEnd: '14:00', isWorking: true },
+  { id: 7, dayOfWeek: 0, open: '', close: '', breakStart: null, breakEnd: null, isWorking: false },
 ];
 
 const SLOT_DURATION_MINUTES = 30;
 
+export const isBlockedDate = (date: Date, blockedDates: BlockedDate[] = []): boolean => {
+  const formattedDate = dayjs(date).format('YYYY-MM-DD');
+  return blockedDates.some(b => b.date === formattedDate);
+};
+
+export const getBusinessHoursForDay = (
+  dayOfWeek: number, 
+  businessHours: BusinessHours[] = defaultWorkingHours
+): BusinessHours | undefined => {
+  return businessHours.find(b => b.dayOfWeek === dayOfWeek);
+};
+
 export const generateTimeSlots = (
   date: Date, 
   appointments: Appointment[], 
-  serviceDuration?: number
+  serviceDuration?: number,
+  businessHours: BusinessHours[] = defaultWorkingHours,
+  blockedDates: BlockedDate[] = []
 ): TimeSlot[] => {
-  const slots: TimeSlot[] = [];
+  // 1. Verificar se a data está bloqueada
+  if (isBlockedDate(date, blockedDates)) return [];
+
+  // 2. Buscar expediente para o dia da semana
   const dayOfWeek = date.getDay();
-  const workingDay = workingHours.find(wh => wh.dayOfWeek === dayOfWeek);
+  const dayConfig = getBusinessHoursForDay(dayOfWeek, businessHours);
+  if (!dayConfig || !dayConfig.isWorking) return [];
 
-  if (!workingDay) {
-    return slots;
-  }
-
+  const slots: TimeSlot[] = [];
   const durationToCheck = serviceDuration || SLOT_DURATION_MINUTES;
 
-  for (const period of workingDay.periods) {
+  // 3. Montar os períodos de trabalho considerando expediente e pausas
+  const periods: { start: string; end: string }[] = [];
+  if (dayConfig.breakStart && dayConfig.breakEnd) {
+    periods.push({ start: dayConfig.open, end: dayConfig.breakStart });
+    periods.push({ start: dayConfig.breakEnd, end: dayConfig.close });
+  } else {
+    periods.push({ start: dayConfig.open, end: dayConfig.close });
+  }
+
+  // 4. Gerar slots baseados nos períodos e filtrar sobrepostos por agendamentos existentes
+  for (const period of periods) {
     const [startHour, startMinute] = period.start.split(':').map(Number);
     const [endHour, endMinute] = period.end.split(':').map(Number);
 
@@ -90,9 +112,17 @@ export const formatDateTime = (date: Date): string => {
   return `${formatDate(date)} às ${formatTime(date)}`;
 };
 
-export const isWorkingDay = (date: Date): boolean => {
+export const isWorkingDay = (
+  date: Date,
+  businessHours: BusinessHours[] = defaultWorkingHours,
+  blockedDates: BlockedDate[] = []
+): boolean => {
+  if (isBlockedDate(date, blockedDates)) {
+    return false;
+  }
   const dayOfWeek = date.getDay();
-  return workingHours.some(wh => wh.dayOfWeek === dayOfWeek);
+  const dayConfig = getBusinessHoursForDay(dayOfWeek, businessHours);
+  return !!dayConfig && dayConfig.isWorking;
 };
 
 export const getMinDate = (): string => {

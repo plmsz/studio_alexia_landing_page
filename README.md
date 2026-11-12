@@ -14,6 +14,10 @@ Desenvolver uma aplicação web moderna e responsiva que:
 - Integre contato via WhatsApp e Instagram
 - Exiba horários de atendimento e localização
 - Seja mobile-first, com design elegante e paleta terrosa (vinho, marrom, dourado e preto)
+- Calendário cliente com integração Google Calendar, Outlook e Apple Calendar
+- Gestão de agenda com horários de funcionamento configuráveis
+- Sistema de bloqueio de datas na agenda
+- Visualização de horários disponíveis considerando disponibilidade e conflitos
 
 ## 🚀 Tecnologias
 
@@ -81,7 +85,21 @@ studio-alexia/
 │   │   ├── utils/
 │   │   │   └── scheduleUtils.ts
 │   │   └── index.ts                    # API pública do domínio
-│   └── auth/                           # Autenticação / Área Administrativa
+│   └── admin/                                # Painel Administrativo
+│       ├── components/
+│       │   ├── BusinessHoursManager.tsx      # Gestão de horários de funcionamento
+│       │   ├── DateBlocker.tsx               # Bloqueio de datas na agenda
+│       │   ├── ServicesList.tsx
+│       │   ├── ServiceForm.tsx
+│       │   └── Admin.module.css
+│       ├── api/
+│       │   ├── scheduleApi.ts                # API de horários de trabalho
+│       │   └── blockedDatesApi               # API de datas bloqueadas
+│       └── types/
+│           ├── BusinessHours                 # Horário de funcionamento por dia da semana
+│           └── BlockedDate                   # Data bloqueada com motivo e tipo
+│
+│   └── auth/                                 # Autenticação / Área Administrativa
 │       ├── components/
 │       │   └── ProtectedRoute.tsx
 │       ├── context/
@@ -136,8 +154,6 @@ studio-alexia/
 
 - ✅ Visualização de serviços disponíveis
 - ✅ Agendamento online de serviços
-- ✅ Confirmação de agendamento por modal
-- ✅ Contato direto via WhatsApp e Instagram
 - ✅ Visualização de horários de atendimento
 - ✅ Localização do estúdio
 - ✅ Interface responsiva (mobile-first)
@@ -246,12 +262,14 @@ ncu --interactive --format group
 ```
 
 ## 🔄 Próximas Implementações
-    - [ ] Gestão Dinâmica de horário de atendimento (Visão Admin) 
-    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente)
-    - [ ] Adicionar mascara e melhorar validação de telefone
-    - [ ] Melhorar loadings com animação simples e no lugar devido
-    - [ ] lazy nas rotas
-    - [ ] useActionState
+- [ ] Transforma cada tab em página, mover o dashboard para src/pages, add componente de ui e criar custom hooks, para o BusinessHoursManager e o DateBlocker.tsx
+- [ ] Usar tan-stack
+- [ ] Trocar modais de feeback em toast
+- [ ] Melhorar o layout mobile da tab de Gestão de Agenda
+- [ ] Adicionar mascara e melhorar validação de telefone
+- [ ] lazy nas rotas
+- [ ] useActionState
+- [ ] Melhorar loadings após ações, em que tela inteira pisca para aparecer "Carregando"
 - [ ] Refatorar dominios/layout entre visitante/cliente/admin
 - [ ] Login Social do cliente com Google via Firebase 
 - [ ] Interface pública para clientes selecionarem procedimentos e marcar, reagendar e cancelar horários de forma autônoma. 

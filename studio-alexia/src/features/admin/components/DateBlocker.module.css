@@ -1,0 +1,96 @@
+.datePickerCard {
+  background: var(--card-bg, #2c2a2a);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px var(--black-30, rgba(0, 0, 0, 0.3));
+  padding: 1.5rem;
+  border: 1px solid var(--gold-20, rgba(194, 167, 115, 0.2));
+}
+
+.datePickerWrapper {
+  display: flex;
+  justify-content: center;
+  background: var(--black-30, rgba(0, 0, 0, 0.3));
+  border: 1px solid var(--gold-30, rgba(194, 167, 115, 0.3));
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.datePickerWrapper :global(.rdp-root) {
+  --rdp-accent-color: var(--gold, #c2a773);
+  --rdp-accent-background-color: var(--gold-20, rgba(194, 167, 115, 0.2));
+  --rdp-day_button-border-radius: 6px;
+  --rdp-day-height: 38px;
+  --rdp-day-width: 38px;
+  --rdp-day_button-height: 36px;
+  --rdp-day_button-width: 36px;
+  color: var(--text-light, #f1f1f1);
+  font-family: inherit;
+}
+
+.datePickerWrapper :global(.rdp-caption_label) {
+  color: var(--gold, #c2a773);
+  font-family: var(--font-heading, serif);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.datePickerWrapper :global(.rdp-weekday) {
+  color: var(--text-soft, #dcd3ce);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.datePickerWrapper :global(.rdp-day_button) {
+  color: var(--text-light, #f1f1f1);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.datePickerWrapper :global(.rdp-day_button:hover:not([disabled])) {
+  background-color: var(--secondary-20, rgba(139, 94, 60, 0.2));
+  color: var(--gold, #c2a773);
+}
+
+.datePickerWrapper :global(.rdp-selected .rdp-day_button) {
+  background-color: var(--gold, #c2a773) !important;
+  color: var(--bg-main, #1c1a1a) !important;
+  font-weight: 700;
+}
+
+.datePickerWrapper :global(.rdp-today:not(.rdp-selected) .rdp-day_button) {
+  border: 1px solid var(--gold, #c2a773);
+  color: var(--gold, #c2a773);
+}
+
+.datePickerWrapper :global(.rdp-outside .rdp-day_button) {
+  opacity: 0.3;
+  color: var(--text-soft, #dcd3ce);
+}
+
+.datePickerWrapper :global(.rdp-nav_button) {
+  color: var(--gold, #c2a773);
+  border-radius: 4px;
+}
+
+.datePickerWrapper :global(.rdp-nav_button:hover) {
+  background-color: var(--secondary-20, rgba(139, 94, 60, 0.2));
+}
+
+.datePickerWrapper :global(.day-blocked) {
+  background-color: rgba(229, 115, 115, 0.25) !important;
+  color: #ff8a80 !important;
+  text-decoration: line-through;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.dateDisplay {
+  padding: 0.75rem;
+  border: 1px solid var(--gold-30, rgba(194, 167, 115, 0.3));
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--black-30, rgba(0, 0, 0, 0.3));
+  color: var(--text-light, #f1f1f1);
+}

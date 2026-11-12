@@ -7,7 +7,7 @@ import { formatDateTime, formatDate, formatTime } from '../utils/scheduleUtils';
 import { getWhatsAppLink } from '../../../shared/lib/formatUtils';
 import whatsappIcon from '../../../shared/assets/img/whatsapp-svgrepo-com.svg';
 import Modal from '../../../shared/ui/Modal';
-import styles from './Admin.module.css';
+import styles from './styles.module.css';
 
 const AppointmentsList = () => {
   const [appointments, setAppointments] = useState<Appointment[]>([]);

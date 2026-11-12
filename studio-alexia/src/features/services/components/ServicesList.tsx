@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Service } from '../types';
 import { formatPrice, formatDuration } from '../../../shared/lib/formatUtils';
 import Modal from '../../../shared/ui/Modal';
-import styles from './Admin.module.css';
+import styles from './styles.module.css';
 
 interface ServicesListProps {
   services: Service[];

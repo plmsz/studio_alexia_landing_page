@@ -5,7 +5,7 @@ import type { Service } from '../../services/types';
 import ServicesList from '../../services/components/ServicesList';
 import ServiceForm from '../../services/components/ServiceForm';
 import AppointmentsList from '../../appointments/components/AppointmentsList';
-import styles from '../../services/components/Admin.module.css';
+import styles from '../../services/components/styles.module.css';
 import { useAuth } from '../hooks/useAuth';
 
 type TabType = 'services' | 'appointments';

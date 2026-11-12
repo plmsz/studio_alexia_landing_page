@@ -1,4 +1,5 @@
 import { ICalendar, GoogleCalendar, OutlookCalendar } from 'datebook';
+import { locationInfo, contactInfo } from '../../../shared/data/index';
 import styles from './CalendarButtons.module.css';
 
 interface CalendarButtonsProps {
@@ -7,9 +8,6 @@ interface CalendarButtonsProps {
   serviceName: string;
   duration: number;   // em minutos
 }
-
-const STUDIO_LOCATION =
-  'Rua Jerusalém de Cajazeiras, 539, Fazenda Grande II, Salvador/BA';
 
 const CalendarButtons = ({
   date,
@@ -25,8 +23,8 @@ const CalendarButtons = ({
     description:
       `Seu agendamento para ${serviceName} foi confirmado.\n\n` +
       `Observação: Tolerância máxima de atraso de 10 minutos.\n` +
-      `Dúvidas ou cancelamentos: Entre em contato pelo WhatsApp (71) 9114-6856.`,
-    location: STUDIO_LOCATION,
+      `Dúvidas ou cancelamentos: Entre em contato pelo WhatsApp ${contactInfo.phoneFormatted}.`,
+    location: locationInfo.address,
     start,
     end,
   };

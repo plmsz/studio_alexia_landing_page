@@ -30,6 +30,7 @@ Desenvolver uma aplicação web moderna e responsiva que:
 - **Firebase** - Autenticação e banco de dados
 - **JSON Server** - Mock de API REST para desenvolvimento
 
+
 ### Bibliotecas
 
 - **Axios** - Cliente HTTP para requisições
@@ -245,31 +246,27 @@ ncu --interactive --format group
 ```
 
 ## 🔄 Próximas Implementações
-    - [ ] Gestão Dinâmica da Agenda e Disponibilidade (Visão Admin) 12
-    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente) 12
+    - [ ] Gestão Dinâmica de horário de atendimento (Visão Admin) 
+    - [ ] Adição ao Calendário Pessoal / Prevenção de No-Show (Visão Cliente)
     - [ ] Adicionar mascara e melhorar validação de telefone
-    - [ ] Melhorar loading com animação simples - apenas no componente e não a tela inteira
-    - [ ] Login Social do cliente com Google via Firebase 15
-    - [ ] Interface pública para clientes selecionarem procedimentos e marcar e cancelar horários de forma autônoma. 
-    - [ ] Coleta de notas por estrelas e feedbacks pós-atendimento para exibição pública na página. - 24
-    - [ ] Testes Unitários e de UI: Cobertura de utilizando Vitest, React Testing Library e MSW. - 25
-
-- [ ] Pipeline automatizado no GitHub Actions com análises do SonarQube, Biome e deploy contínuo.
+    - [ ] Melhorar loadings com animação simples e no lugar devido
+    - [ ] lazy nas rotas
+    - [ ] useActionState
+- [ ] Refatorar dominios/layout entre visitante/cliente/admin
+- [ ] Login Social do cliente com Google via Firebase 
+- [ ] Interface pública para clientes selecionarem procedimentos e marcar, reagendar e cancelar horários de forma autônoma. 
+- [ ] Coleta de notas por estrelas e feedbacks pós-atendimento para exibição pública na página. 
+- [ ] Testes Unitários e de UI: Cobertura de utilizando Vitest, React Testing Library e MSW.
+- [ ] Automação de cenários completos de agendamento e administração com Playwright em telas mobile e desktop.
 - [ ] API em C# .NET Core ou Node.js com camadas desacopladas e persistência em PostgreSQL.
 - [ ] Dashboard de Métricas e Faturamento: Painel com gráficos de receitas, taxa de absenteísmo, ticket médio e serviços mais procurados.
-- [ ] Automação de cenários completos de agendamento e administração com Playwright em telas mobile e desktop.
-- [ ] Renderização prévia no servidor para performance máxima de carregamento e indexação no Google.
-- [ ] Publicação de artigos otimizados via Headless CMS (Sanity/Strapi) para atração de tráfego orgânico.
-- [ ] Exibição de fotos antes/depois com upload e otimização em nuvem via Cloudinary.
+- [ ] Barra de notificações instantâneas no painel admin via SignalR/WebSockets para cancelamentos e alterações.
+- [ ] Sincronização automática dos agendamentos com a conta Google da proprietária.
+- [ ] Integração via Google API (com uso de calendarEventId e attendees) para criar, atualizar e remover compromissos automaticamente nas agendas da proprietária e do cliente.
+- [ ] Disparos automáticos de pós-venda e lembretes de retorno pós-x dias para cada tipo de serviço.
 - [ ] SEO otimizado
 - [ ] Google Analytics integrado
-- [ ] Notificações instantâneas no painel admin via SignalR/WebSockets para cancelamentos e alterações.
-- [ ] Sincronização automática dos agendamentos com a conta Google da proprietária.
-- [ ] Disparos automáticos de pós-venda, aniversários e lembretes de retorno pós-30 dias.
-- [ ] Observabilidade e Telemetria: Monitoramento e captura de exceções em tempo real no cliente e servidor usando Sentry/Datadog.
-- [ ] Cobrança de sinal via Pix dinâmico ou cartão com aprovação imediata via webhooks para novos clientes em procedimentos demorados.
- -[ ] Envio de confirmações e lembretes pré-atendimento (24h e 2h antes) via API Oficial da Meta.
-- [ ] Autenticação por OTP via WhatsApp / SMS ou Magic Link Assinado (Tokens JWT) ou OAuth2 / OpenID Connect Nativo
+- [ ] Publicação de artigos otimizados para atração de tráfego orgânico.
 ---
 
 ## 🔍 Como Revisar o ESLint

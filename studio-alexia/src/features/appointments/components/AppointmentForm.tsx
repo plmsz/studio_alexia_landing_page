@@ -12,6 +12,7 @@ import {
   isWorkingDay,
 } from '../utils/scheduleUtils';
 import Modal from '../../../shared/ui/Modal';
+import CalendarButtons from './CalendarButtons';
 import styles from './AppointmentForm.module.css';
 import calendarIcon from '../../../shared/assets/img/calendar.svg';
 import paintIcon from '../../../shared/assets/img/paint.svg';
@@ -34,8 +35,10 @@ const AppointmentForm = () => {
   const [successModal, setSuccessModal] = useState<{
     isOpen: boolean;
     data: {
-      date: string;
-      time: string;
+      date: string;       // Formatted for display
+      time: string;       // Formatted for display
+      rawDate: string;    // YYYY-MM-DD for calendar links
+      rawTime: string;    // HH:mm for calendar links
       serviceName: string;
       duration: number;
     } | null;
@@ -154,11 +157,15 @@ const AppointmentForm = () => {
 
       const appointmentDate = new Date(selectedDate + 'T00:00:00');
 
+      const rawTime = selectedTime.toTimeString().slice(0, 5); // HH:mm
+
       setSuccessModal({
         isOpen: true,
         data: {
           date: formatDate(appointmentDate),
           time: formatTime(selectedTime),
+          rawDate: selectedDate,  // YYYY-MM-DD
+          rawTime,                // HH:mm
           serviceName: selectedService.title,
           duration: selectedService.duration,
         },
@@ -324,6 +331,12 @@ const AppointmentForm = () => {
               </span>
               Duração: {successModal.data.duration} minutos
             </p>
+            <CalendarButtons
+              date={successModal.data.rawDate}
+              time={successModal.data.rawTime}
+              serviceName={successModal.data.serviceName}
+              duration={successModal.data.duration}
+            />
           </div>
         )}
       </Modal>
